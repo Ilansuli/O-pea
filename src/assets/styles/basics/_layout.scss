@@ -1,0 +1,25 @@
+.main-layout {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    background-color: $clr1;
+    & > *{
+        grid-row: 1;
+    }
+}
+
+.main-text {
+    margin-bottom: rem(90px);
+}
+
+.grid {
+    display: grid;
+}
+
+.recipes-index {
+    grid-column: 2;
+    
+}
+
+.pantry {
+    grid-column: 1;
+}

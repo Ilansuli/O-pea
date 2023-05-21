@@ -1,0 +1,58 @@
+.user-story {
+ border: none;
+ padding: 0;
+ background: transparent;
+ position: relative;
+
+ overflow-y: hidden;
+ &::backdrop {
+  background-color: rgba(0, 0, 0, 0.67);
+ }
+
+ header.story-heder {
+  position: absolute;
+  padding: 0.2em;
+  width: 100%;
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
+  align-items: center;
+  > * {
+   margin-inline-end: 0.2em;
+  }
+  color: $clr1;
+
+  // justify-content: space-between;
+ }
+
+ img {
+  width: 100%;
+  object-fit: cover;
+  aspect-ratio: 1/1;
+  max-height: 470px;
+ }
+
+ .close-btn {
+  @include close-modal-btn;
+ }
+ .after,
+ .before {
+  position: absolute;
+  top: 50%;
+  font-size: 3em;
+  svg {
+   fill: $clr4;
+   box-shadow: 0px 0px 1px 1px #d8d4d4;
+   border-radius: 50%;
+  }
+ }
+
+ .after {
+  right: 0;
+  transform: translateY(-50%);
+ }
+
+ .before {
+  left: 0;
+  transform: translateY(-50%);
+ }
+}
