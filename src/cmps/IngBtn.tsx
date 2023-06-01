@@ -1,21 +1,22 @@
 import { Key,useState } from "react"
-import { IngObj } from "../types/ingredient"
+
 type IngBtnProps = {
-    ing: IngObj,
+    ingName: string,
     key: Key,
-    onHandleIng: () => void
+    onHandleIng: (ingName:string,isSelected:boolean) => void
   }
-  const IngBtn:React.FC<IngBtnProps> = ({ing,onHandleIng}) => {
+  const IngBtn:React.FC<IngBtnProps> = ({ingName,onHandleIng}) => {
     const [isSelected, setIsSelected] = useState<boolean>(false)
     let ingClassName = isSelected? 'selected':'not-selected'
 
     const handleIng = () =>{
         setIsSelected(!isSelected)
-        onHandleIng()
+        onHandleIng(ingName,isSelected)
+        // if(!isSelected)onHandleIng(ingName)
     }
     
   return (
-    <button onClick={()=> handleIng()} className={`ing ${ingClassName}`}>{ing.name}</button>
+    <button onClick={()=> handleIng()} className={`ing ${ingClassName}`}>{ingName}</button>
   )
 }
 

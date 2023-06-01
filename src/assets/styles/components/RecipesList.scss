@@ -1,0 +1,8 @@
+.recipes-list{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    // padding-inline: 24px;
+    padding-block-end: 40px;
+    padding-block-start: 20px;
+
+}

@@ -1,5 +1,5 @@
 import ingredients from "../data/ingredients.json"
-import { IngObj } from "../types/aisle"
+import { IngObj } from "../types/ingredient"
 export const ingredientService = {
     getIngredients
 }

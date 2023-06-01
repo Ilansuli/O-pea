@@ -1,40 +1,44 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html {
-    font-family: "Poppins", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 body {
-    margin: 0;
-    height: 100dvh;
+  margin: 0;
+  height: 100dvh;
 }
 #root {
-    // height: 100%;
+  // height: 100%;
 }
 .app-header,
 .app-nav {
-    height: 8vh;
-    // background: lightcoral;
+  height: 8vh;
+  // background: lightcoral;
+  &::-webkit-scrollbar {
+    // width: 1em;
+    // display: none;
+  }
+
+  &::-webkit-scrollbar-track {
+    // box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    // display: none;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    // background: none;
+    background: #92c952;    
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+  }
 }
 .app-main {
-    // background: lightblue;
-    height: 84vh;
-    overflow-y: auto;
-    &::-webkit-scrollbar {
-        // width: 1em;
-        // display: none;
-    }
-
-    &::-webkit-scrollbar-track {
-        // box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-        // display: none;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        // background: none;
-    }
+  // background: lightblue;
+  height: 84vh;
+  overflow-y: auto;
+ 
 }
 
 h1,
@@ -43,8 +47,8 @@ h3,
 h4,
 h5,
 h6 {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 h1 {
@@ -57,49 +61,48 @@ h3 {
 }
 
 img {
-    width: 100%;
+  width: 100%;
 }
 
 p {
-    margin: 0
+  margin: 0;
 }
 
 button {
-border: 0;
+  border: 0;
 }
 
 // links
 a {
-    &.active {
-    }
+  &.active {
+  }
 }
 
 textarea {
-    resize: none;
-    font-family: inherit;
+  resize: none;
+  font-family: inherit;
 }
 i {
-    &:active {
-        svg {
-            fill: $clr4;
-        }
+  &:active {
+    svg {
     }
+  }
 }
 
 [data-title] {
-      position: relative;
-    }
+  position: relative;
+}
 
-    [data-title]:hover::after {
-      content: attr(data-title);
-      position: absolute;
-      font-size: 12px;
-      background: #F10D0D;
-      color: #fff;
-      padding: 0.2em 0.3em;
-      border-radius: 0.2em;
-      text-transform: capitalize;
-      bottom: -25px;
-      width: max-content;
-      left: 12px;
-    }
+[data-title]:hover::after {
+  content: attr(data-title);
+  position: absolute;
+  font-size: 12px;
+  background: #f10d0d;
+  color: #fff;
+  padding: 0.2em 0.3em;
+  border-radius: 0.2em;
+  text-transform: capitalize;
+  bottom: -25px;
+  width: max-content;
+  left: 12px;
+}

@@ -1,0 +1,68 @@
+.rp {
+  display: flex;
+  //   overflow: hidden;
+  margin-bottom: 16px;
+  border-radius: 4px;
+  box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.1);
+  height: 120px;
+  overflow: hidden;
+  &-img {
+    position: relative;
+    overflow: hidden;
+    width: 32%;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    img {
+      position: absolute;
+      left: -999px;
+      top: -999px;
+      right: -999px;
+      bottom: -999px;
+      height: 100%;
+      max-width: none;
+      margin: auto;
+    }
+  }
+  &-text {
+    overflow: hidden;
+    width: 100%;
+    padding: 15px;
+    header {
+      h4 {
+        margin-top: 0px;
+        margin-bottom: 0px;
+        font-size: 16px;
+        line-height: 22px;
+        font-weight: 400;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    &-heart {
+      width: 18px;
+      height: 18px;
+
+      svg {
+        stroke-width: 3;
+        stroke: black;
+        width: 18px;
+        height: 18px;
+      }
+    }
+    &-link {
+      width: 19px;
+      height: 19px;
+      margin-inline-start: 5px;
+      .link{
+          svg {
+              width: 16px;
+              height: 16px;
+            }
+        }
+    }
+  }
+}

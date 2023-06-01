@@ -1,3 +1,5 @@
+import { RefubrishedUserObj, UserObj} from "../types/user";
+
 export const storageService = {
     query,
     get,
@@ -7,16 +9,15 @@ export const storageService = {
 }
 
 interface Entity  {
-    _id: string
+    _id?: string
     }
 
-function query(entityType:string, delay = 500): Promise<object[]> {
-    console.log();
+function query(entityType:string, delay = 500): Promise<any[]> {
     var entities = JSON.parse(localStorage.getItem(entityType)) || []
     return new Promise(resolve => setTimeout(() => resolve(entities), delay))
 }
 
-function get(entityType:string, entityId:string): object {
+function get(entityType:string, entityId:string): any{
     return query(entityType).then((entities) => {
         const entity = entities.find((entity: Entity) => entity._id === entityId)
         if (!entity) throw new Error(`Get failed, cannot find entity with id: ${entityId} in: ${entityType}`)
@@ -25,7 +26,7 @@ function get(entityType:string, entityId:string): object {
 }
 
 
-function post(entityType:string, newEntity: Entity): Promise<object> {
+function post(entityType:string, newEntity: any): Promise<any>  {
     newEntity= JSON.parse(JSON.stringify(newEntity))    
     newEntity._id = _makeId()
     return query(entityType).then(entities => {
@@ -35,7 +36,7 @@ function post(entityType:string, newEntity: Entity): Promise<object> {
     })
 }
 
-function put(entityType : string, updatedEntity: Entity): Promise<object> {
+function put(entityType : string, updatedEntity: Entity): Promise<any> {
     updatedEntity = JSON.parse(JSON.stringify(updatedEntity))    
     return query(entityType).then(entities => {
         const idx = entities.findIndex((entity: Entity) => entity._id === updatedEntity._id)

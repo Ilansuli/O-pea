@@ -16,5 +16,5 @@
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx"
-  ]
+, "src/services/recipe.service.js", "src/services/recipe.service.js"  ]
 }

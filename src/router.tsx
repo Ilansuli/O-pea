@@ -1,11 +1,8 @@
 // routes.js
-import {createBrowserRouter, RouteObject } from 'react-router-dom';
-import { Outlet} from 'react-router';
+import { createBrowserRouter, RouteObject } from 'react-router-dom';
+import { Outlet } from 'react-router';
 import AppIndex from './views/AppIndex';
-import AppSearch from './views/AppSearch';
-import RecipeLibrary from './views/RecipeLibrary.js';
-import StatsView from './views/StatsView.js';
-
+import LoginSignup from './cmps/LoginSignup';
 const routes: RouteObject[] = [
     {
         path: '/',
@@ -13,21 +10,16 @@ const routes: RouteObject[] = [
         // guard: requireAuth,
     },
     {
-        path: '/about',
-        element: < AppSearch />,
-        // guard: requireAuth,
+        path: '/login',
+        element: <LoginSignup />
     },
     {
-        path: '/contact',
-        element: <RecipeLibrary />,
-    },
-    {
-        path: '/stats',
-        element: <StatsView />,
+        path: '/signup',
+        element: <LoginSignup />
     },
     {
         path: '*',
-        element: <Outlet/>,
+        element: <Outlet />,
     },
 ];
 

@@ -5,7 +5,7 @@ import { useEffect, useState,Key } from "react"
 import IngBtn from "./IngBtn"
 type AislePreviewProps = {
   aisle: AisleObj,
-  onHandleIng: () => void
+  onHandleIng: (ingName:string,isSelected:boolean) => void
 }
 
 const AislePreview: React.FC<AislePreviewProps> = ({ aisle,onHandleIng }) => {
@@ -33,7 +33,7 @@ const AislePreview: React.FC<AislePreviewProps> = ({ aisle,onHandleIng }) => {
       </header>
       <main>
         {ings.map((ing: IngObj) => (
-          <IngBtn onHandleIng={onHandleIng} key={ing._id as Key} ing={ing}/>
+          <IngBtn onHandleIng={onHandleIng} key={ing._id as Key} ingName={ing.name}/>
         ))}
       </main>
     </section>

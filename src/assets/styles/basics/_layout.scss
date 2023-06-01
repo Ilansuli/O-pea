@@ -1,25 +1,27 @@
 .main-layout {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-    background-color: $clr1;
-    & > *{
-        grid-row: 1;
-    }
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  & > * {
+    grid-row: 1;
+  }
 }
 
 .main-text {
-    margin-bottom: rem(90px);
+  margin-bottom: rem(90px);
 }
 
 .grid {
-    display: grid;
+  display: grid;
 }
 
-.recipes-index {
-    grid-column: 2;
-    
+.scroll-placeholder-recipes{
+  grid-column: 2;
 }
 
-.pantry {
-    grid-column: 1;
+.scroll-placeholder-pantry {
+  grid-column: 1;
+}
+.scroll-placeholder-pantry,.scroll-placeholder-recipes {
+  height: 100dvh;
+  overflow: scroll;
 }
