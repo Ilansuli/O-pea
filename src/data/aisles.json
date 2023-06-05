@@ -1,143 +1,143 @@
 [
     {
-      "aisle": "Baking",
+      "name": "Baking",
       "imgURL": "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407998/Recipea/baking_and_grains_posjke.png",
       "_id": "tm4"
     },
     {
-      "aisle": "Jams",
+      "name": "Jams",
       "imgURL": "",
       "_id": "at1"
     },
     {
-      "aisle": "Frozen",
+      "name": "Frozen",
       "imgURL": "",
       "_id": "jk7"
     },
     {
-      "aisle": "Canned and Jarred",
+      "name": "Canned and Jarred",
       "imgURL": "",
       "_id": "nm4"
     },
     {
-      "aisle": "Refrigerated",
+      "name": "Refrigerated",
       "imgURL": "",
       "_id": "uw1"
     },
     {
-      "aisle": "Pasta and Rice",
+      "name": "Pasta and Rice",
       "imgURL": "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407998/Recipea/past_eo9cso.png",
       "_id": "go4"
     },
     {
-      "aisle": "Spices and Seasonings",
+      "name": "Spices and Seasonings",
       "imgURL": "",
       "_id": "s12"
     },
     {
-      "aisle": "Health Foods",
+      "name": "Health Foods",
       "imgURL": "",
       "_id": "u14"
     },
     {
-      "aisle": "Salad Dressing",
+      "name": "Oil, Vinegar, Salad Dressing",
       "imgURL": "",
       "_id": "pu2"
     },
     {
-      "aisle": "Condiments",
+      "name": "Condiments",
       "imgURL": "",
       "_id": "bu8"
     },
     {
-      "aisle": "Savory Snacks",
+      "name": "Savory Snacks",
       "imgURL": "",
       "_id": "mo4"
     },
     {
-      "aisle": "Ethnic Foods",
+      "name": "Ethnic Foods",
       "imgURL": "",
       "_id": "io1"
     },
     {
-      "aisle": "Tea and Coffee",
+      "name": "Tea and Coffee",
       "imgURL": "",
       "_id": "lo0"
     },
     {
-      "aisle": "Meat",
+      "name": "Meat",
       "imgURL": "",
       "_id": "yo2"
     },
     {
-      "aisle": "Gourmet",
+      "name": "Gourmet",
       "imgURL": "",
       "_id": "ho4"
     },
     {
-      "aisle": "Gluten Free",
+      "name": "Gluten Free",
       "imgURL": "",
       "_id": "do9"
     },
     {
-      "aisle": "Alcoholic Beverages",
+      "name": "Alcoholic Beverages",
       "imgURL": "",
       "_id": "sh1"
     },
     {
-      "aisle": "Cereal",
+      "name": "Cereal",
       "imgURL": "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407998/Recipea/porridge_saxch8.png",
       "_id": "k6l"
     },
     {
-      "aisle": "Nuts",
+      "name": "Nuts",
       "imgURL": "",
       "_id": "an9"
     },
     {
-      "aisle": "Beverages",
+      "name": "Beverages",
       "imgURL": "",
       "_id": "lj3"
     },
     {
-      "aisle": "Produce",
+      "name": "Produce",
       "imgURL": "",
       "_id": "ki1"
     },
     {
-      "aisle": "Not in Grocery Store/Homemade",
-      "imgURL": "",
-      "_id": "p03"
-    },
-    {
-      "aisle": "Seafood",
+      "name": "Seafood",
       "imgURL": "",
       "_id": "9o9"
     },
     {
-      "aisle": "Cheese",
+      "name": "Cheese",
       "imgURL": "",
       "_id": "1k1"
     },
     {
-      "aisle": "Dried Fruits",
+      "name": "Dried Fruits",
       "imgURL": "",
       "_id": "1d3"
     },
     {
-      "aisle": "Online",
-      "imgURL": "",
-      "_id": "fa3"
-    },
-    {
-      "aisle": "Grilling Supplies",
+      "name": "Grilling Supplies",
       "imgURL": "",
       "_id": "1js"
     },
     {
-      "aisle": "Bread",
+      "name": "Bread",
       "imgURL": "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407998/Recipea/baking_flours_n7eay7.png",
-      "_id": "abc"
+      "_id": "2k0"
+    },
+    {
+      "name": "Dairy",
+      "imgURL": "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407998/Recipea/baking_flours_n7eay7.png",
+      "_id": "p8i"
+    },
+    {
+      "name": "Sweet Snacks",
+      "imgURL": "",
+      "_id": "o91"
     }
   ]
   

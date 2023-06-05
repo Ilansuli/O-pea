@@ -3,14 +3,15 @@ import { svgService } from '../services/svg.service';
 
 type SvgIconProps = {
     iconName: string,
-    className: string
+    className: string,
+    onClick? : () => any
 };
 
-const SvgIcon: React.FC<SvgIconProps> = ({ iconName, className }) => {
+const SvgIcon: React.FC<SvgIconProps> = ({ iconName, className,onClick }) => {
     const svg = svgService.getSvg(iconName);
 
     return (
-        <i className={className} dangerouslySetInnerHTML={{ __html: svg }} ></i>
+        <i onClick={onClick} className={className} dangerouslySetInnerHTML={{ __html: svg }} ></i>
     );
 }
 export default SvgIcon

@@ -1,6 +1,10 @@
-export type AisleObj = {
-    aisle: string
-    imgURL: string
-    _id: string
-}
+import { IngObj } from "./ingredient";
 
+export type AisleArr = AisleObj[];
+
+export type AisleObj = {
+    name:string
+    imgURL?:string
+    ings?: IngObj[]
+    _id?:string
+}

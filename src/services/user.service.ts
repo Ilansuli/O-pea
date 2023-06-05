@@ -1,3 +1,4 @@
+import { IngObj } from "../types/ingredient";
 import { RefubrishedUserObj, UserCred, UserObj } from "../types/user";
 import { storageService } from "./async-storage.service";
 import { httpService } from "./http.service";
@@ -61,27 +62,35 @@ async function logout() {
   return await httpService.post("auth/logout");
 }
 
-async function updatePantry({ _id, ingName, flag }) {
-  let user = await getById(_id);
-  user = flag
-    ? addIngToPantry(user, ingName)
-    : removeIngFromPantry(user, ingName);
-
+async function updatePantry({ userId, ing, flag }) {
+  let user = await getById(userId);
+  user = flag ? _addIngToPantry(user, ing) : _removeIngFromPantry(user, ing);
   await storageService.put("user", user);
-
   // user = await httpService.put(`user/${user._id}`, user)
   // Handle case in which admin updates other user's details
   const loggedinUser = await getLoggedinUser();
   if (loggedinUser._id === user._id) saveLocalUser(user);
   return user;
 }
-function addIngToPantry(user: UserObj, ingName: string) {
-  user.pantry.push(ingName);
+function _addIngToPantry(user: UserObj, ing: IngObj) {
+  const pantry = user.pantry;
+  const idx = pantry.findIndex((aisle) => aisle.name === ing.aisle);
+  if (idx === -1) {
+    pantry.push({ name: ing.aisle, ings: [ing] });
+  } else {
+    pantry[idx].ings.push(ing);
+  }
   return user;
 }
-function removeIngFromPantry(user: UserObj, ingName: string) {
-  const idx = user.pantry.findIndex((ing) => ing === ingName);
-  user.pantry.splice(idx, 1);
+function _removeIngFromPantry(user: UserObj, ing: IngObj) {
+  const pantry = user.pantry;
+  const aisleIdx = pantry.findIndex((aisle) => aisle.name === ing.aisle);
+  const ingIdx = pantry[aisleIdx].ings.findIndex((i) => i._id === ing._id);
+  pantry[aisleIdx].ings.splice(ingIdx, 1);
+  if (pantry[aisleIdx].ings.length === 0) {
+    pantry.splice(aisleIdx, 1);
+  }
+  
   return user;
 }
 function saveLocalUser(user: UserObj) {

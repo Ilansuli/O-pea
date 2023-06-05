@@ -59,7 +59,9 @@ async function addRecipeMsg(recipeId, txt) {
   return savedMsg;
 }
 
-async function getRecipesByIng(ingredients) {
+async function getRecipesByIng(pantry) {
+  const ingredients = pantry.map((ing) => ing.name);
+  console.log(ingredients);
   const appIds = import.meta.env.VITE_RECIPES_APP_IDS?.split(",");
   const app_id = appIds?.find((id) => id !== undefined && id !== null);
 
@@ -76,8 +78,7 @@ async function getRecipesByIng(ingredients) {
           app_key,
           app_id,
           type: "public",
-          q:
-            ingredients.join(",") ,
+          q: ingredients.join(","),
         },
       }
     );

@@ -1,15 +1,16 @@
 import { Dispatch } from "@reduxjs/toolkit";
-import { recipeService } from "../../services/recipe.service";
 import {} from "../reducers/recipes.slice";
 import { userService } from "../../services/user.service";
 import { UserCred } from "../../types/user";
-import { addIng, removeIng, selectLoggedinUser, setLoggedinUser, setUsers } from "../reducers/user.slice";
-import { useAppSelector } from "../../hooks";
-
-// export const addIngToPantry = (ingName:string) => async (dispatch:Dispatch) => {
-//     const recipes = await recipeService.getRecipesByIng(['butter'])
-//     dispatch(setRecipes(recipes))
-// };
+import {
+  addIng,
+  handleIsUserPantry,
+  removeIng,
+  selectLoggedinUser,
+  setLoggedinUser,
+  setUsers,
+} from "../reducers/user.slice";
+import { IngObj } from "../../types/ingredient";
 
 export const login = (cred: UserCred) => async (dispatch: Dispatch) => {
   const user = await userService.login(cred);
@@ -23,11 +24,13 @@ export const loadUsers = () => async (dispatch: Dispatch) => {
   const users = await userService.getUsers();
   dispatch(setUsers(users));
 };
-export const addIngToPantry =
-  (ingName: string) => async (dispatch: Dispatch) => {
-    dispatch(addIng(ingName));
-  };
+export const addIngToPantry = (ing: IngObj) => async (dispatch: Dispatch) => {
+  dispatch(addIng(ing));
+};
 export const removeIngFromPantry =
-  (ingName: string) => async (dispatch: Dispatch) => {
-    dispatch(removeIng(ingName));
+  (ing: IngObj) => async (dispatch: Dispatch) => {
+    dispatch(removeIng(ing));
   };
+export const togglePantry = () => async (dispatch: Dispatch) => {
+  dispatch(handleIsUserPantry());
+};

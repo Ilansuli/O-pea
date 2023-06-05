@@ -1,27 +1,29 @@
 import { RootState } from "../store";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { recipeService } from "../../services/recipe.service";
-import { Dispatch } from "react";
+import { createSlice, current } from "@reduxjs/toolkit";
+
 import { UserObj } from "../../types/user";
 import { userService } from "../../services/user.service";
+import { aisleService } from "../../services/aisle.service";
 
 export interface UsersState {
   users: any[];
-  loggedinUser: UserObj 
+  loggedinUser: UserObj;
+  isUserPantry: boolean;
 }
 
 const initialState: UsersState = {
   users: [],
   loggedinUser: {
-    username: 'guest',
-    fullname: 'guest',
-    password: 'guest',
-    imgUrl:"https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png",
-    _id:'0000',
-    pantry:[],
+    username: "guest",
+    fullname: "guest",
+    password: "guest",
+    imgUrl:
+      "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png",
+    _id: "0000",
+    pantry: [],
   },
+  isUserPantry: false,
 };
-
 export const usersSlice = createSlice({
   name: "users",
   initialState,
@@ -33,32 +35,54 @@ export const usersSlice = createSlice({
       state.users = action.payload;
     },
     addIng: (state, action) => {
-      if (state.loggedinUser) {
-        userService.updatePantry({
-          _id: state.loggedinUser._id,
-          ingName: action.payload,
-          flag:true
-        });
-        state.loggedinUser.pantry.push(action.payload);
+      const pantry = state.loggedinUser.pantry;
+      const ing = action.payload;
+      userService.updatePantry({
+        userId: state.loggedinUser._id,
+        ing: action.payload,
+        flag: true,
+      });
+      const idx = pantry.findIndex((aisle) => aisle.name === ing.aisle);
+      if (idx === -1) {
+        const aisle = aisleService
+          .getAisles()
+          .find((aisle) => aisle._id === ing.aisleId);
+        pantry.push({ name: aisle.name, ings: [ing] });
+      } else {
+        pantry[idx].ings.push(ing);
       }
+      console.log(current(state));
     },
     removeIng: (state, action) => {
-      if(state.loggedinUser){
-        userService.updatePantry({
-          _id: state.loggedinUser._id,
-          ingName: action.payload,
-          flag:true
-        });
-        const idx = state.loggedinUser.pantry.findIndex(ing=>ing === action.payload)
-        state.loggedinUser.pantry.splice(idx,1)
-      }
+      const pantry = state.loggedinUser.pantry;
+      const ing = action.payload;
+
+      userService.updatePantry({
+        userId: state.loggedinUser._id,
+        ing: action.payload,
+        flag: true,
+      });
+
+      const aisleIdx = pantry.findIndex((aisle) => aisle.name === ing.aisle);
+      const ingIdx = pantry[aisleIdx].ings.findIndex((i) => i._id === ing._id);
+      pantry[aisleIdx].ings.splice(ingIdx, 1);
+    },
+    handleIsUserPantry: (state) => {
+      state.isUserPantry = !state.isUserPantry;
     },
   },
 });
-export const { setUsers, setLoggedinUser, addIng, removeIng } =
-  usersSlice.actions;
+export const {
+  setUsers,
+  setLoggedinUser,
+  addIng,
+  removeIng,
+  handleIsUserPantry,
+} = usersSlice.actions;
 
 export const selectUsers = (state: RootState) => state.users.users;
 export const selectLoggedinUser = (state: RootState) =>
   state.users.loggedinUser;
+export const selectIsUserPantry = (state: RootState) =>
+  state.users.isUserPantry;
 export default usersSlice.reducer;
