@@ -74,9 +74,9 @@ async function updatePantry({ userId, ing, flag }) {
 }
 function _addIngToPantry(user: UserObj, ing: IngObj) {
   const pantry = user.pantry;
-  const idx = pantry.findIndex((aisle) => aisle.name === ing.aisle);
+  const idx = pantry.findIndex((aisle) => aisle._id === ing.aisleId);
   if (idx === -1) {
-    pantry.push({ name: ing.aisle, ings: [ing] });
+    pantry.push({ name: ing.aisleId, ings: [ing] });
   } else {
     pantry[idx].ings.push(ing);
   }
@@ -84,7 +84,7 @@ function _addIngToPantry(user: UserObj, ing: IngObj) {
 }
 function _removeIngFromPantry(user: UserObj, ing: IngObj) {
   const pantry = user.pantry;
-  const aisleIdx = pantry.findIndex((aisle) => aisle.name === ing.aisle);
+  const aisleIdx = pantry.findIndex((aisle) => aisle._id === ing.aisleId);
   const ingIdx = pantry[aisleIdx].ings.findIndex((i) => i._id === ing._id);
   pantry[aisleIdx].ings.splice(ingIdx, 1);
   if (pantry[aisleIdx].ings.length === 0) {

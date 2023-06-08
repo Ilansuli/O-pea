@@ -1,0 +1,22 @@
+.ing {
+  display: inline-block;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 20px;
+  text-decoration: none;
+  cursor: pointer;
+  color: rgba(79, 80, 90, 0.6);
+  &.not-selected {
+    background-color: rgba(181, 191, 200, 0.2);
+    &:hover {
+      background-color: #93c759;
+      color: #fff;
+    }
+  }
+  &.selected {
+    background-color: #93c759;
+    color: #fff;
+  }
+}

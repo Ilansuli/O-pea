@@ -6,6 +6,11 @@
   box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.1);
   height: 120px;
   overflow: hidden;
+  cursor: pointer;
+  transition: .10s;
+  &:hover{
+    scale: 1.05;
+  }
   &-img {
     position: relative;
     overflow: hidden;

@@ -83,7 +83,6 @@ async function getRecipesByIng(pantry) {
       }
     );
     const refRecipes = refubrishRecipes(response);
-    console.log(refRecipes);
     return refRecipes;
   } catch (err) {
     console.log(err, "getRecipesByIng(),recipe.service.js");
@@ -91,7 +90,6 @@ async function getRecipesByIng(pantry) {
 }
 
 function refubrishRecipes(res) {
-  console.log("hey");
   const refRecipes = res.data.hits.map((r) => {
     const {
       calories,
@@ -124,6 +122,7 @@ function refubrishRecipes(res) {
       _id: utilService.makeId(),
     };
   });
+console.log(refRecipes);
   return refRecipes;
 }
 

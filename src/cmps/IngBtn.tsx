@@ -1,23 +1,24 @@
-import { Key,useState } from "react"
+import { Key, useState, useEffect } from "react"
 import { IngObj } from "../types/ingredient"
+import { useAppSelector } from "../hooks"
+import { selectLoggedinUser } from "../store/reducers/user.slice"
 
 type IngBtnProps = {
-    ing: IngObj,
-    key: Key,
-    onHandleIng: (ing:IngObj,isSelected:boolean) => void
-  }
-  const IngBtn:React.FC<IngBtnProps> = ({ing,onHandleIng}) => {
-    const [isSelected, setIsSelected] = useState<boolean>(false)
-    let ingClassName = isSelected? 'selected':'not-selected'
+  ing: IngObj,
+  key: Key,
+  onHandleIng: (ing: IngObj, isIngInPantry: boolean) => void
+}
+const IngBtn: React.FC<IngBtnProps> = ({ ing, onHandleIng }) => {
+  const pantry = useAppSelector(selectLoggedinUser).pantry
+  let isIngInPantry = pantry.some(aisle=> aisle.ings.some(i=>i._id === ing._id))
+  let ingClassName = isIngInPantry ? 'selected' : 'not-selected'
 
-    const handleIng = () =>{
-        setIsSelected(!isSelected)
-        onHandleIng(ing,isSelected)
-        // if(!isSelected)onHandleIng(ingName)
-    }
-    
+  const handleIng = () => { 
+    onHandleIng(ing, isIngInPantry)
+  }
+
   return (
-    <button onClick={()=> handleIng()} className={`ing ${ingClassName}`}>{ing.name}</button>
+    <button onClick={() => handleIng()} className={`ing ${ingClassName}`}>{ing.name}</button>
   )
 }
 

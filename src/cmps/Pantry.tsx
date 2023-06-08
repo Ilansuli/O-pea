@@ -19,17 +19,15 @@ const Pantry: React.FC = () => {
   useEffect(() => {
     loadAisles()
 
-    if (loggedinUser) console.log(loggedinUser)
     return () => {
     }
   }, [])
-
   const loadAisles = () => {
     const aisles: AisleObj[] = aisleService.getAisles()
     setAisles(aisles)
   }
-  const handleIng = (ing: IngObj, isSelected: boolean) => {
-    isSelected ? dispatch(removeIngFromPantry(ing)) : dispatch(addIngToPantry(ing))
+  const handleIng = (ing: IngObj, isIngInPantry: boolean) => {
+    isIngInPantry ? dispatch(removeIngFromPantry(ing)) : dispatch(addIngToPantry(ing))
   }
   if (aisles.length === 0) return <div>Loading...</div>
 
@@ -41,16 +39,11 @@ const Pantry: React.FC = () => {
           <div className="list-wrapper">
             {isUserPantry ?
               pantry.map((aisle) => (
-                <div key={aisle.name}>
-                  <h4>{aisle.name}</h4>
-                  {aisle.ings.map(ing => (
-                    <p key={ing.aisleId}>{ing.name}</p>
-                  ))}
-                </div>
+                <AislePreview key={aisle._id} aisle={aisle} isUserPantry={isUserPantry} />
               ))
               :
-              aisles.map((aisle: AisleObj) => (
-                <AislePreview onHandleIng={handleIng} key={aisle._id as Key} aisle={aisle} />
+              aisles.map((aisle) => (
+                <AislePreview onHandleIng={handleIng} key={aisle._id as Key} aisle={aisle} isUserPantry={isUserPantry} />
               ))
             }
           </div>

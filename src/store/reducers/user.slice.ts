@@ -42,16 +42,20 @@ export const usersSlice = createSlice({
         ing: action.payload,
         flag: true,
       });
-      const idx = pantry.findIndex((aisle) => aisle.name === ing.aisle);
+      const idx = pantry.findIndex((aisle) => aisle._id === ing.aisleId);
       if (idx === -1) {
         const aisle = aisleService
           .getAisles()
           .find((aisle) => aisle._id === ing.aisleId);
-        pantry.push({ name: aisle.name, ings: [ing] });
+        pantry.push({
+          name: aisle.name,
+          imgURL: aisle.imgURL,
+          _id: aisle._id,
+          ings: [ing],
+        });
       } else {
         pantry[idx].ings.push(ing);
       }
-      console.log(current(state));
     },
     removeIng: (state, action) => {
       const pantry = state.loggedinUser.pantry;
@@ -62,10 +66,12 @@ export const usersSlice = createSlice({
         ing: action.payload,
         flag: true,
       });
-
-      const aisleIdx = pantry.findIndex((aisle) => aisle.name === ing.aisle);
+      const aisleIdx = pantry.findIndex((aisle) => aisle._id === ing.aisleId);
       const ingIdx = pantry[aisleIdx].ings.findIndex((i) => i._id === ing._id);
       pantry[aisleIdx].ings.splice(ingIdx, 1);
+      if (pantry[aisleIdx].ings.length === 0) {
+        pantry.splice(aisleIdx, 1);
+      }
     },
     handleIsUserPantry: (state) => {
       state.isUserPantry = !state.isUserPantry;
@@ -85,4 +91,5 @@ export const selectLoggedinUser = (state: RootState) =>
   state.users.loggedinUser;
 export const selectIsUserPantry = (state: RootState) =>
   state.users.isUserPantry;
+
 export default usersSlice.reducer;
