@@ -14,11 +14,13 @@ const RecipePreview: React.FC<RecipePreviewProps> = ({ recipe }) => {
     }
 
     return (
-        <article onClick={()=>setCurrRecipe()} className="rp">
-            <LazyLoadImage
-                src={recipe.imgs.REGULAR.url}
-                effect='blur'
-            />
+        <article onClick={() => setCurrRecipe()} className="rp">
+            <div className="rp-img-container">
+                <LazyLoadImage
+                    src={recipe.imgs.REGULAR.url}
+                    effect='blur'
+                />
+            </div>
 
             <div className="rp-text">
                 <header>

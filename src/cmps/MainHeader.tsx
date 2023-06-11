@@ -15,7 +15,6 @@ const MainHeader: React.FC<MainHeaderProps> = ({ isPantry }) => {
   }
   return (
     <section className="main-header">
-      <p>Logo</p>
       {isPantry ?
         <div>
           {isUserPantry ?
@@ -27,8 +26,8 @@ const MainHeader: React.FC<MainHeaderProps> = ({ isPantry }) => {
         </div>
         :
         <>
-          <NavLink to={'/login'}>login</NavLink>
-          <NavLink to={'/signup'}>signup</NavLink>
+          {/* <NavLink to={'/login'}>login</NavLink>
+          <NavLink to={'/signup'}>signup</NavLink> */}
         </>
       }
       <input type="text" />

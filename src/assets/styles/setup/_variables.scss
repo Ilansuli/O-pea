@@ -1,6 +1,6 @@
 // COLOR PALETTE
-$clr1: #7ed845;
-$clr2: #222;
+$clr1: #72c83b;
+$clr2: #d8456b;
 $clr3: #000;
 $clr4: #dbdbdb;
 $clr5: #2d2d2d;
@@ -9,14 +9,19 @@ $clr6: #0d99ff;
 $br: 0.5em;
 
 $text: #303133;
-$grad: radial-gradient(circle farthest-corner at 35% 90%, #fec564, transparent 50%),
- radial-gradient(circle farthest-corner at 0 140%, #fec564, transparent 50%),
- radial-gradient(ellipse farthest-corner at 0 -25%, #5258cf, transparent 50%),
- radial-gradient(ellipse farthest-corner at 20% -50%, #5258cf, transparent 50%),
- radial-gradient(ellipse farthest-corner at 100% 0, #893dc2, transparent 50%),
- radial-gradient(ellipse farthest-corner at 60% -20%, #893dc2, transparent 50%),
- radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, transparent),
- linear-gradient(#6559ca, #bc318f 30%, #e33f5f 50%, #f77638 70%, #fec66d 100%);
+$light-text: rgba(79, 80, 90, 0.6);
+$grad: radial-gradient(
+    circle farthest-corner at 35% 90%,
+    #fec564,
+    transparent 50%
+  ),
+  radial-gradient(circle farthest-corner at 0 140%, #fec564, transparent 50%),
+  radial-gradient(ellipse farthest-corner at 0 -25%, #5258cf, transparent 50%),
+  radial-gradient(ellipse farthest-corner at 20% -50%, #5258cf, transparent 50%),
+  radial-gradient(ellipse farthest-corner at 100% 0, #893dc2, transparent 50%),
+  radial-gradient(ellipse farthest-corner at 60% -20%, #893dc2, transparent 50%),
+  radial-gradient(ellipse farthest-corner at 100% 100%, #d9317a, transparent),
+  linear-gradient(#6559ca, #bc318f 30%, #e33f5f 50%, #f77638 70%, #fec66d 100%);
 
 $bs: 0 0 2px 0 rgba(0, 0, 0, 0.2);
 

@@ -15,8 +15,6 @@ const RecipesIndex: React.FC = () => {
   useEffect(() => {
     if (loggedinUser) {
       const ings = loggedinUser.pantry.flatMap(aisle => aisle.ings)
-      console.log(ings);
-
       dispatch(loadRecipesFromPantry(ings))
     }
     return () => {

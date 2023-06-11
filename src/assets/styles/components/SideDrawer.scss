@@ -1,17 +1,11 @@
 .d-container {
-  
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.32);
-    position: absolute;
-    z-index: 2;
-  
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.32);
+  position: absolute;
+  z-index: 2;
 }
 .d {
-  transform: translateX(450px);
-  &.opened {
-    transform: translateX(0px);
-  }
   width: 450px;
   position: fixed;
   overflow: auto;
@@ -23,13 +17,19 @@
   z-index: 2;
   display: block;
   background-color: #fff;
-  transition: transition 0.12s ease-in;
+  transition: transform 0.12s ease-in;
+  transform: translateX(450px);
+  &.opened {
+    transform: translateX(0px);
+  }
+
   &-content {
     min-height: 100vh;
     max-width: 100%;
     overflow-x: hidden;
     position: relative;
   }
+
   &-header {
     position: relative;
     z-index: 1;
@@ -47,13 +47,19 @@
       width: 16px;
       height: 16px;
       padding: 15px;
-      transition: background-color 0.2s;
+      transition: background-color 0.15s;
       cursor: pointer;
-      &:hover{
-        background: rgba(0,0,0,0.12);
+      background: white;
+      &:hover {
+        background: $clr1;
+        scale: 1.05;
+        svg {
+          #vector {
+            stroke: white;
+          }
+        }
       }
       svg {
-        fill: white;
         width: 16px;
         height: 16px;
         position: absolute;
@@ -80,20 +86,168 @@
       }
     }
   }
-  &-body {  
+
+  &-body {
     position: relative;
     z-index: 1;
-    margin-top: -32px;
+    margin-top: -50px;
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
-    &-wrapper {
-      padding-bottom: 49px;
+    &-floating-details {
+      position: relative;
+      margin-bottom: -75px;
+      background-color: #fff;
+      border-radius: 4px;
+      box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.1);
+      width: 90%;
+      left: 23px;
+      header {
+        padding: 12px 12px 6px;
+        div {
+          display: flex;
+          justify-content: space-between;
+          h4 {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+          }
+        }
+      }
+      footer {
+        border-top: 1px solid hsla(0, 0%, 59.2%, 0.2);
+        border-top: 1px solid hsla(0, 0%, 59.2%, 0.2);
+        display: flex;
+        justify-content: flex-end;
+        gap: 6px;
+        align-items: center;
+        padding: 12px;
+        p {
+          font-size: 12px;
+          color: $light-text;
+        }
+      }
+    }
+
+    &-main {
       border-top-left-radius: 16px;
       border-top-right-radius: 16px;
       background-color: #fff;
       padding-inline: 24px;
-      padding-block: 20px;
-      height: 100dvh;
+      box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+      padding-block-end: 50px;
+      padding-block-start: 107px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      &-ing {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        h4 {
+          font-weight: 400;
+          padding: 15px 0;
+        }
+      }
+      .domain-btn {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        border-radius: 4px;
+        background-color: $clr1;
+        font-size: 16px;
+        line-height: 24px;
+        text-align: center;
+        cursor: pointer;
+        h4 {
+          color: white;
+          line-height: 24px;
+        }
+        p {
+          font-size: 10px;
+          line-height: 11px;
+          color: hsla(0, 0%, 100%, 0.8);
+        }
+      }
+      .nutrition-details {
+        &-title {
+          margin-block: 20px;
+        }
+        .nutrition {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 8px;
+          padding: 15px 15px 20px;
+          border-radius: 4px;
+          box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
+          &-title {
+            color: $clr2;
+          }
+          p {
+            font-size: 16px;
+            color: $clr2;
+          }
+        }
+      }
+    }
+  }
+
+  &-footer {
+    padding-bottom: 24px;
+    background-color: #f3f7fb;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    padding-block-start: 17px;
+    margin-block-start: -19px;
+    padding-inline: 24px;
+    &-title {
+      margin-block-end: 15px;
+    }
+    .rp {
+      background-color: white;
+    }
+  }
+  &-heart-icon {
+    svg{
+      stroke: $clr1;
+      cursor: pointer;
+      &:hover{
+        scale: 1.10;
+        fill: $clr1;
+      }
+    }
+
+  }
+  &-clock-icon {
+    width: 16px;
+    height: 16px;
+    svg {
+      width: 16px;
+      height: 16px;
+      & * {
+        stroke: $light-text;
+        // fill: $light-text;
+      }
+    }
+  }
+  &-checked-icon {
+    width: 36px;
+    height: 36px;
+    svg {
+      width: 36px;
+      height: 36px;
+      fill: $clr1;
+    }
+  }
+  &-not-checked-icon {
+    width: 36px;
+    height: 36px;
+    svg {
+      & * {
+        // stroke: red;
+        fill: red;
+      }
+      width: 36px;
+      height: 36px;
     }
   }
 }

@@ -100,7 +100,7 @@ function refubrishRecipes(res) {
       label: name,
       mealType,
       images: imgs,
-      totalNutrients: nutrients,
+      totalNutrients,
       totalTime: time,
       url: srcUrl,
     } = r.recipe;
@@ -115,18 +115,37 @@ function refubrishRecipes(res) {
       name,
       mealType,
       imgs,
-      nutrients,
+      nutrients: _handleNutrients(totalNutrients),
       time,
       srcUrl,
       domain: _getDomain(srcUrl),
       _id: utilService.makeId(),
     };
   });
-console.log(refRecipes);
   return refRecipes;
 }
 
 //Local Functions//
+function _handleNutrients(nutrients) {
+  const { CHOCDF, ENERC_KCAL, CHOLE, FAT, FASAT, PROCNT, SUGAR, NA, FIBTG } =
+    nutrients;
+  const refubrishedNutrs = [
+    {
+      ...ENERC_KCAL,
+      label: "Calories",
+      quantity: parseInt(ENERC_KCAL.quantity),
+    },
+    { ...CHOCDF, quantity: parseInt(CHOCDF.quantity) },
+    { ...CHOLE, quantity: parseInt(CHOLE.quantity) },
+    { ...FAT, quantity: parseInt(FAT.quantity) },
+    { ...FASAT, label: "Saturated Fat", quantity: parseInt(FASAT.quantity) },
+    { ...PROCNT, quantity: parseInt(PROCNT.quantity) },
+    { ...SUGAR, quantity: parseInt(SUGAR.quantity) },
+    { ...NA, quantity: parseInt(NA.quantity) },
+    { ...FIBTG, quantity: parseInt(FIBTG.quantity) },
+  ];
+  return refubrishedNutrs;
+}
 
 function _getDomain(url) {
   const regex = /^https?:\/\/(?:www\.)?([^\/]+)/;
