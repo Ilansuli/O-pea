@@ -1,26 +1,21 @@
-import { IngObj } from "./ingredient";
 
 export type recipeObj = {
-  calories: number;
-  cuisineType: string[];
-  dishType: string[];
-  domain: string;
-  imgs: _recipeImgs;
-  ings: any[];
-  labels: string[];
-  mealType: string[];
+  dishTypes?: string[];
+  domain?: string;
+  img?:string
+  ings?: any[];
+  labels?: string[];
   name: string;
-  nutrients: _NutrientObj[]
-  srcUrl: string;
-  time: number;
+  srcUrl?: string;
+  time?: number;
   _id: string;
 };
-type _recipeImgs = {
-  LARGE: { url: string };
-  REGULAR: { url: string };
-  SMALL: { url: string };
-  THUMBNAIL: { url: string };
-};
+// type _recipeImgs = {
+//   LARGE: { url: string };
+//   REGULAR: { url: string };
+//   SMALL: { url: string };
+//   THUMBNAIL: { url: string };
+// };
 
 type _NutrientObj = {
   label: string;

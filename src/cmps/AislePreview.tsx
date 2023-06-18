@@ -4,16 +4,20 @@ import ingredients from '../data/ingredients.json'
 import { useEffect, useState, Key } from "react"
 import IngBtn from "./IngBtn"
 import SvgIcon from "./SvgIcon"
+import { useAppDispatch, useAppSelector } from "../hooks"
+import { selectLoggedinUser } from "../store/reducers/user.slice"
+import { removeIngFromPantry } from "../store/actions/user.action"
 type AislePreviewProps = {
   aisle: AisleObj,
   onHandleIng?: (ing: IngObj, isSelected: boolean) => void
   isUserPantry: boolean
 }
-
 const AislePreview: React.FC<AislePreviewProps> = ({ aisle, onHandleIng, isUserPantry }) => {
+  const dispatch = useAppDispatch()
   const [ings, setIngs] = useState<IngObj[]>([])
   const [visibleIngs, setVisibleIngs] = useState(10)
   const visibleIngsList = ings.slice(0, visibleIngs)
+  const pantry = useAppSelector(selectLoggedinUser).pantry
   useEffect(() => {
     loadIngredients()
     return () => {
@@ -27,28 +31,40 @@ const AislePreview: React.FC<AislePreviewProps> = ({ aisle, onHandleIng, isUserP
     setIngs(filteredIngs)
   }
 
+  const countAisleIngsInPantry = () => {
+    let aisleInPantry = pantry.find(a => a._id === aisle._id)
+    return aisleInPantry ? aisleInPantry.ings.length : '0'
+  }
 
   return (
     <section className={isUserPantry ? "aisle-preview user" : "aisle-preview"}>
+
       <header>
         <div className="aisle-img-wrap">
           <img src={aisle.imgURL} alt="" />
         </div>
-        <h4>{aisle.name}</h4>
-        {visibleIngs === 10 ?
-          <SvgIcon onClick={() => setVisibleIngs(ings.length)} iconName="arrowDown" className="arrow-down-icon" />
-          :
-          <SvgIcon onClick={() => setVisibleIngs(10)} iconName="arrowUp" className="arrow-up-icon" />
+        <div className="aisle-name-container">
+          <h4>{aisle.name}</h4>
+          {!isUserPantry && (
+            <p>{countAisleIngsInPantry()}/{ings.length} Ingredients</p>
+          )}
+        </div>
+        {!isUserPantry && (
+          visibleIngs === 10 ?
+            <SvgIcon onClick={() => setVisibleIngs(ings.length)} iconName="arrowDown" className="arrow-down-icon" />
+            :
+            <SvgIcon onClick={() => setVisibleIngs(10)} iconName="arrowUp" className="arrow-up-icon" />
+        )
         }
       </header>
+
       <main>
         {isUserPantry ?
           (
             aisle.ings.map((ing) => (
               <div key={ing._id} className="ing-preview">
                 <p className="ing-preview-name">{ing.name}</p>
-                <SvgIcon iconName="search" className="search-icon" />
-                <SvgIcon iconName="trash" className="trash-icon" />
+                <SvgIcon onClick={async () => dispatch(removeIngFromPantry(ing))} iconName="trash" className="trash-icon" />
               </div>
             ))
           ) :

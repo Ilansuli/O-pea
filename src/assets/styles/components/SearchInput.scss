@@ -1,0 +1,84 @@
+.search-input-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  position: relative;
+  background: white;
+  padding: 16px;
+  min-height: 48px;
+  padding: 10px 16px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  .search-input-icon {
+    width: 20px;
+    height: 20px;
+    path {
+      transition: stroke 0.15s ease-in;
+      stroke: hsl(0deg 0% 74.9%);
+    }
+  }
+  input {
+    height: 24px;
+    outline: none;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background-color: inherit;
+    border: 0;
+    width: 100%;
+    background-color: transparent;
+    color: black;
+    &::placeholder {
+      color: hsl(0deg 0% 74.9%);
+      font-size: 16px;
+    }
+  }
+  .search-results {
+    position: absolute;
+    z-index: 2;
+    background: white;
+    padding-block: 10px;
+    top: 49px;
+    width: 100%;
+    left: 2px;
+    border-radius: 3px;
+    box-shadow: -2px 10px 20px rgba(0, 0, 0, 0.19),
+      -1px -2px 6px rgba(0, 0, 0, 0.13);
+    &-preview {
+      display: flex;
+      align-items: center;
+      padding-inline: 10px;
+      padding-block: 15px;
+      gap: 10px;
+      cursor: pointer;
+      p{
+        font-size: 15px;
+        font-weight: 600;
+        color: #d8456b;      }
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+    }
+    &-plus-icon,
+    &-trash-icon {
+      width: 20px;
+      height: 20px;
+    }
+    &-trash-icon {
+      path {
+        stroke: red;
+      }
+    }
+    &-plus-icon {
+      path {
+        fill: $clr1;
+      }
+    }
+  }
+}
+
+.search-input-container.input-focused .search-input-icon svg path {
+  stroke: black;
+}

@@ -1,13 +1,14 @@
 import React from 'react';
 import { svgService } from '../services/svg.service';
+import { MouseEvent } from 'react';
 
 type SvgIconProps = {
     iconName: string,
     className: string,
-    onClick? : () => any
+    onClick?: (ev: MouseEvent<HTMLButtonElement>) => any
 };
 
-const SvgIcon: React.FC<SvgIconProps> = ({ iconName, className,onClick }) => {
+const SvgIcon: React.FC<SvgIconProps> = ({ iconName, className, onClick }) => {
     const svg = svgService.getSvg(iconName);
 
     return (

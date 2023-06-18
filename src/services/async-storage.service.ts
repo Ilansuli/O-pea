@@ -37,6 +37,8 @@ function post(entityType:string, newEntity: any): Promise<any>  {
 }
 
 function put(entityType : string, updatedEntity: Entity): Promise<any> {
+    console.log('updated');
+    
     updatedEntity = JSON.parse(JSON.stringify(updatedEntity))    
     return query(entityType).then(entities => {
         const idx = entities.findIndex((entity: Entity) => entity._id === updatedEntity._id)

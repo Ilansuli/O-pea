@@ -1,0 +1,134 @@
+.auth-index {
+  display: grid;
+  height: 100%;
+  grid-template-rows: 56px 1fr;
+  background-image: linear-gradient(
+      180deg,
+      hsla(0, 0%, 100%, 0.7),
+      hsla(0, 0%, 100%, 0.7)
+    ),
+    url(https://res.cloudinary.com/dmmsf57ko/image/upload/v1685632878/onboarding-bg_lf354f.svg);
+  background-position: 0px 0px, 50% 0%;
+  background-size: auto, auto;
+  &-header {
+    position: relative;
+
+    a {
+      top: 59px;
+      left: 29px;
+      cursor: pointer;
+      position: absolute;
+      display: block;
+      width: 30px;
+      height: 30px;
+      .login-signup-arrow-left-icon {
+        display: block;
+        width: 37px;
+        height: 37px;
+        svg {
+          line {
+            stroke: $clr2;
+            fill: $clr2;
+          }
+          polyline {
+            stroke: $clr2;
+          }
+          cursor: pointer;
+          transition: 0.2s ease-in;
+
+          &:hover {
+            scale: 1.05;
+          }
+        }
+      }
+    }
+  }
+  &-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-block-start: -55px;
+    padding: 24px;
+    header {
+      margin-block-end: 24px;
+      display: flex;
+      flex-direction: column;
+      /* justify-content: center; */
+      align-items: center;
+      .logo-img-wrapper {
+        width: 250px;
+      }
+      .login-signup-title {
+        font-size: 23px;
+      }
+    }
+    .form-wrapper {
+      width: 40%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      //   padding-top: 60px;
+      form {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 24px;
+        border-radius: 8px;
+        background-color: #fff;
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
+        font-size: 16px;
+        line-height: 24px;
+        input {
+          min-height: 48px;
+          margin-bottom: 0px;
+          padding: 12px 16px;
+          width: 100%;
+          font-size: 14px;
+          color: #333333;
+          background-color: #ffffff;
+          border-width: 1px;
+          border-style: solid;
+          border-color: hsla(0, 0%, 59.2%, 0.2) transparent transparent;
+          text-align: center;
+          outline: none;
+          appearance: none;
+          &::placeholder {
+            color: #bababe;
+          }
+          &:first-of-type {
+            border-top-color: transparent;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+          }
+          &:last-of-type {
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+          }
+          &.input-err{
+            border: 1px solid red;
+          }
+        }
+        button {
+          background-color: #93c759; 
+          color: #fff;
+          font-size: 16px;
+          line-height: 24px;
+          font-weight: 600;
+          cursor: pointer;
+          color: #fff;
+          padding: 12px 24px;
+        }
+      }
+      .login-signup-nav{
+        align-self: center;
+        font-weight: 600;
+        color: $clr2;
+        font-size: 16px;
+        &:hover{
+            scale: 1.02;
+        }
+      }
+    }
+  }
+}

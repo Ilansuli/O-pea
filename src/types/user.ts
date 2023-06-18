@@ -1,5 +1,5 @@
 import { AisleArr } from "./aisle";
-import { IngObj } from "./ingredient";
+import { recipeObj } from "./recipe";
 
 export type UserObj = {
   username: string;
@@ -8,7 +8,9 @@ export type UserObj = {
   imgUrl: string;
   _id?: string;
   pantry: AisleArr;
+  favourites: recipeObj[];
 };
+
 export type RefubrishedUserObj = {
   fullname: string;
   imgUrl: string;
@@ -21,4 +23,5 @@ export type UserCred = {
   fullname?: string;
   imgUrl?: string;
   pantry?: AisleArr;
+  favourites?: [];
 };

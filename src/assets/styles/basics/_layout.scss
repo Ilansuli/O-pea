@@ -13,15 +13,21 @@
 .grid {
   display: grid;
 }
-
-.scroll-placeholder-recipes{
+.col-2{
   grid-column: 2;
 }
-
-.scroll-placeholder-pantry {
+.col-1{
   grid-column: 1;
 }
-.scroll-placeholder-pantry,.scroll-placeholder-recipes {
+.row-2{
+  grid-row: 2;
+}
+.row-1{
+  grid-row: 1;
+}
+
+
+.scroll-placeholder{
   height: 100dvh;
   overflow: scroll;
 }

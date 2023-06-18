@@ -9,6 +9,7 @@ import { aisleService } from "../services/aisle.service";
 import { selectIsUserPantry, selectLoggedinUser } from "../store/reducers/user.slice";
 import { addIngToPantry, removeIngFromPantry } from "../store/actions/user.action";
 import { IngObj } from "../types/ingredient";
+import { utilService } from "../services/util.service";
 
 const Pantry: React.FC = () => {
   const [aisles, setAisles] = useState<AisleObj[]>([])
@@ -27,12 +28,12 @@ const Pantry: React.FC = () => {
     setAisles(aisles)
   }
   const handleIng = (ing: IngObj, isIngInPantry: boolean) => {
-    isIngInPantry ? dispatch(removeIngFromPantry(ing)) : dispatch(addIngToPantry(ing))
+    isIngInPantry ? dispatch(removeIngFromPantry(ing)) : utilService.debounce(dispatch(addIngToPantry(ing)),1000)
   }
   if (aisles.length === 0) return <div>Loading...</div>
 
   return (
-    <div className="scroll-placeholder-pantry ">
+    <div className="scroll-placeholder col-1 ">
       <main className="pantry-index">
         <MainHeader isPantry={true} />
         <section className="pantry-index-body">

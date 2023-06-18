@@ -17,7 +17,10 @@ export const userService = {
   getUsers,
   getById,
   remove,
-  updatePantry,
+  // updatePantry,
+  updateUser,
+  // addIngToPantry,
+  getGuestUser,
 };
 
 function getUsers() {
@@ -27,8 +30,21 @@ function getUsers() {
 
 async function getById(userId: string): Promise<any> {
   const user = storageService.get("user", userId);
+
   // const user = await httpService.get(`user/${userId}`)
   return user;
+}
+function getGuestUser() {
+  return {
+    username: "guest",
+    fullname: "guest",
+    password: "guest",
+    imgUrl:
+      "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png",
+    _id: "0000",
+    pantry: [],
+    favourites: [],
+  };
 }
 function remove(userId: string) {
   return storageService.remove("user", userId);
@@ -38,12 +54,13 @@ function remove(userId: string) {
 async function login(userCred: UserCred) {
   const users = await storageService.query("user");
   const user = users.find(
-    (user: UserObj) => user.username === userCred.username
+    (user: UserObj) =>
+      user.username === userCred.username && user.password === userCred.password
   );
   // const user = await httpService.post('auth/login', userCred)
   if (user) {
     return saveLocalUser(user);
-  }
+  } else return null;
 }
 
 async function signup(userCred: UserCred) {
@@ -51,55 +68,68 @@ async function signup(userCred: UserCred) {
     userCred.imgUrl =
       "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png";
   userCred.pantry = [];
+  userCred.favourites = [];
   const user = await storageService.post("user", userCred);
   // const user = await httpService.post('auth/signup', userCred)
   return saveLocalUser(user);
 }
 
 async function logout() {
-  sessionStorage.removeRecipe(STORAGE_KEY_LOGGEDIN_USER);
-  // socketService.logout()
-  return await httpService.post("auth/logout");
+  sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER);
+  // return await httpService.post("auth/logout");
 }
 
-async function updatePantry({ userId, ing, flag }) {
-  let user = await getById(userId);
-  user = flag ? _addIngToPantry(user, ing) : _removeIngFromPantry(user, ing);
-  await storageService.put("user", user);
+async function updateUser(updatedUser: UserObj) {
+  console.log(updatedUser);
+
+  await storageService.put("user", updatedUser);
   // user = await httpService.put(`user/${user._id}`, user)
-  // Handle case in which admin updates other user's details
   const loggedinUser = await getLoggedinUser();
-  if (loggedinUser._id === user._id) saveLocalUser(user);
-  return user;
+  console.log(loggedinUser);
+
+  if (loggedinUser._id === updatedUser._id) saveLocalUser(updatedUser);
+  return updatedUser;
 }
-function _addIngToPantry(user: UserObj, ing: IngObj) {
-  const pantry = user.pantry;
-  const idx = pantry.findIndex((aisle) => aisle._id === ing.aisleId);
-  if (idx === -1) {
-    pantry.push({ name: ing.aisleId, ings: [ing] });
-  } else {
-    pantry[idx].ings.push(ing);
-  }
-  return user;
-}
-function _removeIngFromPantry(user: UserObj, ing: IngObj) {
-  const pantry = user.pantry;
-  const aisleIdx = pantry.findIndex((aisle) => aisle._id === ing.aisleId);
-  const ingIdx = pantry[aisleIdx].ings.findIndex((i) => i._id === ing._id);
-  pantry[aisleIdx].ings.splice(ingIdx, 1);
-  if (pantry[aisleIdx].ings.length === 0) {
-    pantry.splice(aisleIdx, 1);
-  }
-  
-  return user;
-}
+
+// async function updatePantry({ userId, ing, flag }) {
+//   let user = await getById(userId);
+//   // user = flag ? _addIngToPantry(user, ing) : _removeIngFromPantry(user, ing);
+//   await storageService.put("user", user);
+//   // user = await httpService.put(`user/${user._id}`, user)
+//   // Handle case in which admin updates other user's details
+//   const loggedinUser = await getLoggedinUser();
+//   if (loggedinUser._id === user._id) saveLocalUser(user);
+//   return user;
+// }
+// function addIngToPantry(user: UserObj, ing: IngObj) {
+//   const pantry = user.pantry;
+//   const idx = pantry.findIndex((aisle) => aisle._id === ing.aisleId);
+//   if (idx === -1) {
+//     pantry.push({ name: ing.aisleId, ings: [ing] });
+//   } else {
+//     pantry[idx].ings.push(ing);
+//   }
+//   return user;
+// }
+// function _removeIngFromPantry(user: UserObj, ing: IngObj) {
+//   const pantry = user.pantry;
+//   const aisleIdx = pantry.findIndex((aisle) => aisle._id === ing.aisleId);
+//   const ingIdx = pantry[aisleIdx].ings.findIndex((i) => i._id === ing._id);
+//   pantry[aisleIdx].ings.splice(ingIdx, 1);
+//   if (pantry[aisleIdx].ings.length === 0) {
+//     pantry.splice(aisleIdx, 1);
+//   }
+
+//   return user;
+// }
 function saveLocalUser(user: UserObj) {
-  const { _id, fullname, imgUrl, pantry } = user;
+  const { _id, fullname, imgUrl, pantry, favourites } = user;
   const newUser = {
     _id,
     fullname,
     imgUrl,
     pantry,
+    favourites,
   };
   sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(newUser));
   return newUser;

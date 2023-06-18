@@ -1,15 +1,16 @@
 import { Dispatch } from "@reduxjs/toolkit";
 import { recipeService } from "../../services/recipe.service";
-import { setRecipes,setCurrRecipe } from "../reducers/recipes.slice";
+import { setRecipes, setCurrRecipe } from "../reducers/recipes.slice";
 import { IngObj } from "../../types/ingredient";
-import { recipeObj } from "../../types/recipe";
 
-export const loadRecipesFromPantry =
-  (ings: IngObj[]) => async (dispatch: Dispatch) => {
-    const recipes = await recipeService.getRecipesByIng(ings);
+export const loadRecipes =
+  (ings: IngObj[]) =>
+  async (dispatch: Dispatch) => {
+    const recipes = await recipeService.fetchRecipes(ings);
     dispatch(setRecipes(recipes));
   };
-export const setRecipe =
-  (recipe: recipeObj) => async (dispatch: Dispatch) => {
-    dispatch(setCurrRecipe(recipe))
-  };
+export const setRecipe = (recipeId: string) => async (dispatch: Dispatch) => {
+  const recipe =
+    recipeId === "-1" ? null : await recipeService.fetchRecipeInfoById(recipeId);
+  dispatch(setCurrRecipe(recipe));
+};

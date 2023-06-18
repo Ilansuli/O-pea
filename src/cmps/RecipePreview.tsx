@@ -1,23 +1,28 @@
-import { useAppDispatch } from "../hooks";
-import { setRecipe } from "../store/actions/recipes.action";
+import { recipeObj } from "../types/recipe";
 import SvgIcon from "./SvgIcon";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { MouseEvent } from 'react';
+import { useAppSelector } from "../hooks";
+import { selectLoggedinUser } from "../store/reducers/user.slice";
 
 type RecipePreviewProps = {
-    recipe: any
+    recipe: recipeObj
+    onSetCurrRecipe: (recipeId: string) => void
+    onToggleFavourite: (recipe: recipeObj) => void
 };
 
-const RecipePreview: React.FC<RecipePreviewProps> = ({ recipe }) => {
-    const dispatch = useAppDispatch()
-    const setCurrRecipe = () => {
-        dispatch(setRecipe(recipe))
+const RecipePreview: React.FC<RecipePreviewProps> = ({ recipe, onSetCurrRecipe, onToggleFavourite }) => {
+    const favourites = useAppSelector(selectLoggedinUser).favourites
+    const isFavourite = favourites.some(r => r._id === recipe._id)
+    const handleFavourite = (ev: MouseEvent<HTMLButtonElement>) => {
+        ev.stopPropagation()
+        onToggleFavourite(recipe)
     }
-
     return (
-        <article onClick={() => setCurrRecipe()} className="rp">
+        <article onClick={() => onSetCurrRecipe(recipe._id)} className="rp">
             <div className="rp-img-container">
                 <LazyLoadImage
-                    src={recipe.imgs.REGULAR.url}
+                    src={recipe.img}
                     effect='blur'
                 />
             </div>
@@ -25,12 +30,8 @@ const RecipePreview: React.FC<RecipePreviewProps> = ({ recipe }) => {
             <div className="rp-text">
                 <header>
                     <h4>{recipe.name}</h4>
-                    <SvgIcon iconName={'heart'} className="rp-text-heart" />
-                    <a href={recipe.srcUrl} onClick={(e) => e.stopPropagation()} className="rp-text-link">
-                        <SvgIcon iconName={'link'} className="link" />
-                    </a>
+                    <SvgIcon onClick={(ev) => handleFavourite(ev)} iconName={'heart'} className={`rp-text-heart ${isFavourite && 'full'}`} />
                 </header>
-                <p className="rp-domain">{recipe.domain}</p>
             </div>
         </article>
     )

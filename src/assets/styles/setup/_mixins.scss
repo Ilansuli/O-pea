@@ -193,12 +193,40 @@
       padding-block: 20px;
       height: 100dvh;
     }
-    // border-top-left-radius: 16px;
-    // border-top-right-radius: 16px;
-    // box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
-    // margin-block-start: -16px;
-    // z-index: 1;
-    // position: relative;
-    // background: white;
   }
 }
+
+@mixin ease-in-menu{
+    position: relative;
+    &-modal {
+      animation: q-fade 0.2s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+      position: absolute;
+      background: $clr2;
+      color: black;
+      width: 200px;
+      right: 8px;
+      z-index: 2;
+      padding-block: 5px;
+      border-radius: 5px;
+      box-shadow: -2px 4px 10px 0 rgba(0, 0, 0, 0.3);
+      
+      li {
+        padding-inline: 10px;
+        padding-block: 10px;
+        border-radius: 2px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        cursor: pointer;
+        p {
+          font-size: 14px;
+          color: white;
+          font-weight: 600;
+        }
+        &:hover {
+          background: rgba(0, 0, 0, 0.1);
+        }
+      }
+    }
+  }

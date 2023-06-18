@@ -56,27 +56,19 @@
     &-heart {
       margin-block-end: 4px;
       stroke-width: 3;
-      width: 18px;
-      height: 18px;
+      width: 22px;
+      height: 22px;
       svg {
         stroke: $clr1;
         cursor: pointer;
-        width: 18px;
-        height: 18px;
         &:hover {
           scale: 1.1;
           fill: $clr1;
         }
       }
-    }
-    &-link {
-      width: 19px;
-      height: 19px;
-      margin-inline-start: 5px;
-      .link {
-        svg {
-          width: 16px;
-          height: 16px;
+      &.full{
+        svg{
+          fill: $clr1;
         }
       }
     }

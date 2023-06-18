@@ -1,9 +1,10 @@
 import { RootState } from "../store";
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 import { UserObj } from "../../types/user";
 import { userService } from "../../services/user.service";
 import { aisleService } from "../../services/aisle.service";
+import { useAppSelector } from "../../hooks";
 
 export interface UsersState {
   users: any[];
@@ -21,6 +22,7 @@ const initialState: UsersState = {
       "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png",
     _id: "0000",
     pantry: [],
+    favourites: [],
   },
   isUserPantry: false,
 };
@@ -37,41 +39,93 @@ export const usersSlice = createSlice({
     addIng: (state, action) => {
       const pantry = state.loggedinUser.pantry;
       const ing = action.payload;
-      userService.updatePantry({
-        userId: state.loggedinUser._id,
-        ing: action.payload,
-        flag: true,
-      });
-      const idx = pantry.findIndex((aisle) => aisle._id === ing.aisleId);
-      if (idx === -1) {
+      const aisleIdx = pantry.findIndex((aisle) => aisle._id === ing.aisleId);
+
+      let updatedUser: UserObj;
+      let updatedPantry = [...pantry];
+
+      //Add Aisle + Ing to the pantry
+      if (aisleIdx === -1) {
         const aisle = aisleService
           .getAisles()
           .find((aisle) => aisle._id === ing.aisleId);
-        pantry.push({
-          name: aisle.name,
-          imgURL: aisle.imgURL,
-          _id: aisle._id,
-          ings: [ing],
-        });
+        aisle.ings = [];
+        aisle.ings.push(ing);
+        updatedPantry.push(aisle);
+        updatedUser = {
+          ...state.loggedinUser,
+          pantry: updatedPantry,
+        };
+        //Add Ing to existing Aisle
       } else {
-        pantry[idx].ings.push(ing);
+        updatedPantry[aisleIdx].ings.push(ing);
       }
+      updatedUser = {
+        ...state.loggedinUser,
+        pantry: updatedPantry,
+      };
+      state.loggedinUser = updatedUser;
+      if (state.loggedinUser._id !== "0000")
+        userService.updateUser(updatedUser);
     },
     removeIng: (state, action) => {
       const pantry = state.loggedinUser.pantry;
       const ing = action.payload;
 
-      userService.updatePantry({
-        userId: state.loggedinUser._id,
-        ing: action.payload,
-        flag: true,
-      });
+      let updatedUser: UserObj;
+      let updatedPantry = [...pantry];
+
       const aisleIdx = pantry.findIndex((aisle) => aisle._id === ing.aisleId);
       const ingIdx = pantry[aisleIdx].ings.findIndex((i) => i._id === ing._id);
-      pantry[aisleIdx].ings.splice(ingIdx, 1);
+
+      updatedPantry[aisleIdx].ings.splice(ingIdx, 1);
       if (pantry[aisleIdx].ings.length === 0) {
-        pantry.splice(aisleIdx, 1);
+        updatedPantry.splice(aisleIdx, 1);
       }
+
+      updatedUser = {
+        ...state.loggedinUser,
+        pantry: updatedPantry,
+      };
+      state.loggedinUser = updatedUser;
+
+      if (state.loggedinUser._id !== "0000")
+        userService.updateUser(updatedUser);
+    },
+    clearOutPantry: (state) => {
+      let updatedUser = {
+        ...state.loggedinUser,
+        pantry: [],
+      };
+      state.loggedinUser = updatedUser;
+      if (state.loggedinUser._id !== "0000")
+        userService.updateUser(updatedUser);
+    },
+    toggleFavouriteRecipe: (state, action) => {
+      const recipe = action.payload;
+      let updatedUser: UserObj;
+
+      const recipeIdx = state.loggedinUser.favourites.findIndex(
+        (r) => r._id === recipe._id
+      );
+
+      recipeIdx === -1
+        ? //Add to favourites
+          (updatedUser = {
+            ...state.loggedinUser,
+            favourites: [...state.loggedinUser.favourites, recipe],
+          })
+        : //Remove from favourites
+          (updatedUser = {
+            ...state.loggedinUser,
+            favourites: [
+              ...state.loggedinUser.favourites.filter(
+                (r) => r._id !== recipe._id
+              ),
+            ],
+          });
+      state.loggedinUser = updatedUser;
+      userService.updateUser(updatedUser);
     },
     handleIsUserPantry: (state) => {
       state.isUserPantry = !state.isUserPantry;
@@ -84,6 +138,8 @@ export const {
   addIng,
   removeIng,
   handleIsUserPantry,
+  toggleFavouriteRecipe
+  ,clearOutPantry
 } = usersSlice.actions;
 
 export const selectUsers = (state: RootState) => state.users.users;

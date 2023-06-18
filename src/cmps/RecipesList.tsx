@@ -1,17 +1,20 @@
+import { setCurrRecipe } from "../store/reducers/recipes.slice";
+import { recipeObj } from "../types/recipe";
 import RecipePreview from "./RecipePreview";
 
 type RecipesListProps = {
-    recipes:any[]
+    recipes: any[]
+    onSetCurrRecipe: (recipeId: string) => void
+    onToggleFavourite:(recipe:recipeObj) => void
 };
 
-const RecipesList: React.FC<RecipesListProps> = ({ recipes }) => {
+const RecipesList: React.FC<RecipesListProps> = ({ recipes,onSetCurrRecipe,onToggleFavourite }) => {
     return (
         <>
-        <h2>You Can Make {recipes.length} recipes</h2>
-        <div className="recipes-list">
-        {recipes.map(recipe => {
-            return <RecipePreview key={recipe._id} recipe={recipe}/>
-        })} </div>
+            <div className="recipes-list">
+                {recipes.map(recipe => {
+                    return <RecipePreview onToggleFavourite={onToggleFavourite} onSetCurrRecipe={onSetCurrRecipe} key={recipe._id} recipe={recipe} />
+                })} </div>
         </>
     );
 }
