@@ -1,23 +1,24 @@
-import { RootState } from "../store";
 import { createSlice } from "@reduxjs/toolkit";
-
-import { UserObj } from "../../types/user";
+import { UserObj, RefubrishedUserObj } from "../../types/user";
 import { userService } from "../../services/user.service";
 import { aisleService } from "../../services/aisle.service";
 import { useAppSelector } from "../../hooks";
-
-export interface UsersState {
+import { actionTypes } from "../constants/action.types";
+import { IngObj } from "../../types/ingredient";
+import { RecipeObj } from "../../types/recipe";
+import { RootState } from "../store";
+import { PayloadAction } from "@reduxjs/toolkit";
+import { AisleArr } from "../../types/aisle";
+interface UsersState {
   users: any[];
-  loggedinUser: UserObj;
+  loggedinUser: RefubrishedUserObj;
   isUserPantry: boolean;
 }
 
 const initialState: UsersState = {
   users: [],
   loggedinUser: {
-    username: "guest",
     fullname: "guest",
-    password: "guest",
     imgUrl:
       "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png",
     _id: "0000",
@@ -26,126 +27,47 @@ const initialState: UsersState = {
   },
   isUserPantry: false,
 };
-export const usersSlice = createSlice({
-  name: "users",
+
+export const userSlice = createSlice({
+  name: "userSlice",
   initialState,
   reducers: {
-    setLoggedinUser: (state, action) => {
+    SET_LOGGEDIN_USER: (
+      state: UsersState,
+      action: PayloadAction<RefubrishedUserObj>
+    ) => {
       state.loggedinUser = action.payload;
     },
-    setUsers: (state, action) => {
+    SET_USERS: (
+      state: UsersState,
+      action: PayloadAction<RefubrishedUserObj[]>
+    ) => {
       state.users = action.payload;
     },
-    addIng: (state, action) => {
-      const pantry = state.loggedinUser.pantry;
-      const ing = action.payload;
-      const aisleIdx = pantry.findIndex((aisle) => aisle._id === ing.aisleId);
-
-      let updatedUser: UserObj;
-      let updatedPantry = [...pantry];
-
-      //Add Aisle + Ing to the pantry
-      if (aisleIdx === -1) {
-        const aisle = aisleService
-          .getAisles()
-          .find((aisle) => aisle._id === ing.aisleId);
-        aisle.ings = [];
-        aisle.ings.push(ing);
-        updatedPantry.push(aisle);
-        updatedUser = {
-          ...state.loggedinUser,
-          pantry: updatedPantry,
-        };
-        //Add Ing to existing Aisle
-      } else {
-        updatedPantry[aisleIdx].ings.push(ing);
-      }
-      updatedUser = {
-        ...state.loggedinUser,
-        pantry: updatedPantry,
-      };
-      state.loggedinUser = updatedUser;
-      if (state.loggedinUser._id !== "0000")
-        userService.updateUser(updatedUser);
+    UPDATE_PANTRY: (state: UsersState, action: PayloadAction<AisleArr>) => {
+      state.loggedinUser.pantry = action.payload;
     },
-    removeIng: (state, action) => {
-      const pantry = state.loggedinUser.pantry;
-      const ing = action.payload;
-
-      let updatedUser: UserObj;
-      let updatedPantry = [...pantry];
-
-      const aisleIdx = pantry.findIndex((aisle) => aisle._id === ing.aisleId);
-      const ingIdx = pantry[aisleIdx].ings.findIndex((i) => i._id === ing._id);
-
-      updatedPantry[aisleIdx].ings.splice(ingIdx, 1);
-      if (pantry[aisleIdx].ings.length === 0) {
-        updatedPantry.splice(aisleIdx, 1);
-      }
-
-      updatedUser = {
-        ...state.loggedinUser,
-        pantry: updatedPantry,
-      };
-      state.loggedinUser = updatedUser;
-
-      if (state.loggedinUser._id !== "0000")
-        userService.updateUser(updatedUser);
+    UPDATE_FAVOURITES: (state: UsersState, action: PayloadAction<RecipeObj[]>) => {
+      state.loggedinUser.favourites = action.payload;
+      console.log(state.loggedinUser.favourites);
+      
     },
-    clearOutPantry: (state) => {
-      let updatedUser = {
-        ...state.loggedinUser,
-        pantry: [],
-      };
-      state.loggedinUser = updatedUser;
-      if (state.loggedinUser._id !== "0000")
-        userService.updateUser(updatedUser);
-    },
-    toggleFavouriteRecipe: (state, action) => {
-      const recipe = action.payload;
-      let updatedUser: UserObj;
-
-      const recipeIdx = state.loggedinUser.favourites.findIndex(
-        (r) => r._id === recipe._id
-      );
-
-      recipeIdx === -1
-        ? //Add to favourites
-          (updatedUser = {
-            ...state.loggedinUser,
-            favourites: [...state.loggedinUser.favourites, recipe],
-          })
-        : //Remove from favourites
-          (updatedUser = {
-            ...state.loggedinUser,
-            favourites: [
-              ...state.loggedinUser.favourites.filter(
-                (r) => r._id !== recipe._id
-              ),
-            ],
-          });
-      state.loggedinUser = updatedUser;
-      userService.updateUser(updatedUser);
-    },
-    handleIsUserPantry: (state) => {
+    HANDLE_IS_USER_PANTRY: (state: UsersState) => {
       state.isUserPantry = !state.isUserPantry;
+      
     },
   },
 });
+
 export const {
-  setUsers,
-  setLoggedinUser,
-  addIng,
-  removeIng,
-  handleIsUserPantry,
-  toggleFavouriteRecipe
-  ,clearOutPantry
-} = usersSlice.actions;
+  SET_LOGGEDIN_USER,
+  SET_USERS,
+  UPDATE_PANTRY,
+  UPDATE_FAVOURITES,
+  HANDLE_IS_USER_PANTRY,
+} = userSlice.actions;
+// export const selectUsers = (state: RootState) => state.users.users;
+export const selectLoggedinUser = (state: RootState) => state.user.loggedinUser;
+export const selectIsUserPantry = (state: RootState) => state.user.isUserPantry;
 
-export const selectUsers = (state: RootState) => state.users.users;
-export const selectLoggedinUser = (state: RootState) =>
-  state.users.loggedinUser;
-export const selectIsUserPantry = (state: RootState) =>
-  state.users.isUserPantry;
-
-export default usersSlice.reducer;
+export default userSlice.reducer;

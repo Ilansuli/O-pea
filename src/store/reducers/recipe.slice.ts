@@ -2,12 +2,12 @@ import { RootState } from '../store';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { recipeService } from '../../services/recipe.service';
 import { Dispatch } from 'react';
-import { recipeObj } from '../../types/recipe';
+import { RecipeObj } from '../../types/recipe';
 
 
 export interface RecipesState {
-    recipes: recipeObj[]
-    currRecipe: recipeObj | null
+    recipes: RecipeObj[]
+    currRecipe: RecipeObj | null
 }
 
 const initialState: RecipesState = {
@@ -30,7 +30,7 @@ export const recipesSlice = createSlice({
 
 export const { setRecipes,setCurrRecipe } = recipesSlice.actions
 
-export const selectRecipes = (state: RootState) => state.recipes.recipes
-export const selectCurrRecipe = (state: RootState) => state.recipes.currRecipe
+export const selectRecipes = (state: RootState) => state.recipe.recipes
+export const selectCurrRecipe = (state: RootState) => state.recipe.currRecipe
 
 export default recipesSlice.reducer

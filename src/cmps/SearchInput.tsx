@@ -6,6 +6,7 @@ import { setRecipe } from "../store/actions/recipes.action";
 import { addIngToPantry, removeIngFromPantry } from "../store/actions/user.action";
 import { selectLoggedinUser } from "../store/reducers/user.slice";
 import { IngObj } from "../types/ingredient";
+import { RecipeObj } from "../types/recipe";
 import SvgIcon from "./SvgIcon";
 import { useEffect, useState } from 'react'
 type SearchInputProps = {
@@ -44,13 +45,16 @@ const SearchInput: React.FC<SearchInputProps> = ({ isPantry }) => {
         setSearchHandler(() => ({ searchResults: [], searchValue: '' }))
     }
     const onSearchResults = async () => {
+        let res: IngObj[] | RecipeObj[]
 
         if (searchValue.trim() === '') return resetSearchResults()
-        const res = isPantry ?
-            ingredientService.searchIng(searchValue).slice(0, 6)
-            :
-            await recipeService.fetchRecipesBySearch(searchValue)
 
+        if (isPantry) {
+            res = ingredientService.searchIng(searchValue)
+            res = res.slice(0, 6)
+        } else {
+            res = await recipeService.fetchRecipesBySearch(searchValue)
+        }
         setSearchHandler((prevState) => ({ ...prevState, searchResults: res }))
     }
 

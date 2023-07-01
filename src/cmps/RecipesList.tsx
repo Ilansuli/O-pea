@@ -1,11 +1,11 @@
-import { setCurrRecipe } from "../store/reducers/recipes.slice";
-import { recipeObj } from "../types/recipe";
+import { setCurrRecipe } from "../store/reducers/recipe.slice";
+import { RecipeObj } from "../types/recipe";
 import RecipePreview from "./RecipePreview";
 
 type RecipesListProps = {
     recipes: any[]
     onSetCurrRecipe: (recipeId: string) => void
-    onToggleFavourite:(recipe:recipeObj) => void
+    onToggleFavourite:(recipe:RecipeObj) => void
 };
 
 const RecipesList: React.FC<RecipesListProps> = ({ recipes,onSetCurrRecipe,onToggleFavourite }) => {

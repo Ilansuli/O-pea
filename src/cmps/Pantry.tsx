@@ -19,7 +19,6 @@ const Pantry: React.FC = () => {
   const pantry = loggedinUser.pantry
   useEffect(() => {
     loadAisles()
-
     return () => {
     }
   }, [])
@@ -28,7 +27,7 @@ const Pantry: React.FC = () => {
     setAisles(aisles)
   }
   const handleIng = (ing: IngObj, isIngInPantry: boolean) => {
-    isIngInPantry ? dispatch(removeIngFromPantry(ing)) : utilService.debounce(dispatch(addIngToPantry(ing)),1000)
+    isIngInPantry ? dispatch(removeIngFromPantry(ing)) : utilService.debounce(dispatch(addIngToPantry(ing)), 1000)
   }
   if (aisles.length === 0) return <div>Loading...</div>
 

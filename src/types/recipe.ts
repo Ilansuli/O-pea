@@ -1,5 +1,5 @@
 
-export type recipeObj = {
+export type RecipeObj = {
   dishTypes?: string[];
   domain?: string;
   img?:string

@@ -1,14 +1,15 @@
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import { selectCurrRecipe, selectRecipes } from "../store/reducers/recipes.slice";
+import { selectCurrRecipe, selectRecipes } from "../store/reducers/recipe.slice";
 import SvgIcon from "./SvgIcon";
 import { setRecipe } from "../store/actions/recipes.action";
 import RecipePreview from "./RecipePreview";
 import { useRef, useState } from 'react'
 import KitchenLoader from "./KitchenLoader";
 import { selectLoggedinUser } from "../store/reducers/user.slice";
-import { recipeObj } from "../types/recipe";
+import { RecipeObj } from "../types/recipe";
 import { toggleFavourite } from "../store/actions/user.action";
+
 const SideDrawer: React.FC = ({ }) => {
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const dispatch = useAppDispatch()
@@ -28,7 +29,7 @@ const SideDrawer: React.FC = ({ }) => {
         }
         dispatch(setRecipe(recipeId)).then(() => setIsLoading(false))
     }
-    const onToggleFavourite = (recipe: recipeObj) => {
+    const onToggleFavourite = (recipe: RecipeObj) => {
         dispatch(toggleFavourite(recipe))
     }
     if (!recipe) return <div className="d"></div>

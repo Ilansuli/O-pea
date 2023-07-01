@@ -1,4 +1,4 @@
-import { recipeObj } from "../types/recipe";
+import { RecipeObj } from "../types/recipe";
 import SvgIcon from "./SvgIcon";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { MouseEvent } from 'react';
@@ -6,9 +6,9 @@ import { useAppSelector } from "../hooks";
 import { selectLoggedinUser } from "../store/reducers/user.slice";
 
 type RecipePreviewProps = {
-    recipe: recipeObj
+    recipe: RecipeObj
     onSetCurrRecipe: (recipeId: string) => void
-    onToggleFavourite: (recipe: recipeObj) => void
+    onToggleFavourite: (recipe: RecipeObj) => void
 };
 
 const RecipePreview: React.FC<RecipePreviewProps> = ({ recipe, onSetCurrRecipe, onToggleFavourite }) => {

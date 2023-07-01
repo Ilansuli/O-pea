@@ -4,5 +4,9 @@
     // padding-inline: 24px;
     padding-block-end: 40px;
     padding-block-start: 20px;
+    @include for-mobile-layout{
+    grid-template-columns: 1fr;
+
+    }
 
 }

@@ -23,15 +23,15 @@ export const userService = {
   getGuestUser,
 };
 
-function getUsers() {
-  return storageService.query("user");
-  // return httpService.get(`user`);
+function getUsers(): Promise<RefubrishedUserObj[]> {
+  // return storageService.query("user");
+  return httpService.get(`user`);
 }
 
 async function getById(userId: string): Promise<any> {
-  const user = storageService.get("user", userId);
+  // const user = storageService.get("user", userId);
 
-  // const user = await httpService.get(`user/${userId}`)
+  const user = await httpService.get(`user/${userId}`);
   return user;
 }
 function getGuestUser() {
@@ -47,17 +47,17 @@ function getGuestUser() {
   };
 }
 function remove(userId: string) {
-  return storageService.remove("user", userId);
-  // return httpService.delete(`user/${userId}`)
+  // return storageService.remove("user", userId);
+  return httpService.delete(`user/${userId}`);
 }
 
 async function login(userCred: UserCred) {
-  const users = await storageService.query("user");
-  const user = users.find(
-    (user: UserObj) =>
-      user.username === userCred.username && user.password === userCred.password
-  );
-  // const user = await httpService.post('auth/login', userCred)
+  // const users = await getUsers();
+  // const user = users.find(
+  //   (user: UserObj) =>
+  //     user.username === userCred.username && user.password === userCred.password
+  // );
+  const user = await httpService.post("auth/login", userCred);
   if (user) {
     return saveLocalUser(user);
   } else return null;
@@ -69,60 +69,28 @@ async function signup(userCred: UserCred) {
       "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png";
   userCred.pantry = [];
   userCred.favourites = [];
-  const user = await storageService.post("user", userCred);
-  // const user = await httpService.post('auth/signup', userCred)
+  // const user = await storageService.post("user", userCred);
+  const user = await httpService.post("auth/signup", userCred);
   return saveLocalUser(user);
 }
 
 async function logout() {
-  sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER);
-  // return await httpService.post("auth/logout");
+  // sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER);
+  return await httpService.post("auth/logout");
 }
 
-async function updateUser(updatedUser: UserObj) {
-  console.log(updatedUser);
+async function updateUser(updatedUser: RefubrishedUserObj) {
 
-  await storageService.put("user", updatedUser);
-  // user = await httpService.put(`user/${user._id}`, user)
-  const loggedinUser = await getLoggedinUser();
-  console.log(loggedinUser);
+  // await storageService.put("user", updatedUser);
+  
+  updatedUser = await httpService.put(`user/${updatedUser._id}`, updatedUser);
+  const loggedinUser = getLoggedinUser();
 
   if (loggedinUser._id === updatedUser._id) saveLocalUser(updatedUser);
   return updatedUser;
 }
-
-// async function updatePantry({ userId, ing, flag }) {
-//   let user = await getById(userId);
-//   // user = flag ? _addIngToPantry(user, ing) : _removeIngFromPantry(user, ing);
-//   await storageService.put("user", user);
-//   // user = await httpService.put(`user/${user._id}`, user)
-//   // Handle case in which admin updates other user's details
-//   const loggedinUser = await getLoggedinUser();
-//   if (loggedinUser._id === user._id) saveLocalUser(user);
-//   return user;
-// }
-// function addIngToPantry(user: UserObj, ing: IngObj) {
-//   const pantry = user.pantry;
-//   const idx = pantry.findIndex((aisle) => aisle._id === ing.aisleId);
-//   if (idx === -1) {
-//     pantry.push({ name: ing.aisleId, ings: [ing] });
-//   } else {
-//     pantry[idx].ings.push(ing);
-//   }
-//   return user;
-// }
-// function _removeIngFromPantry(user: UserObj, ing: IngObj) {
-//   const pantry = user.pantry;
-//   const aisleIdx = pantry.findIndex((aisle) => aisle._id === ing.aisleId);
-//   const ingIdx = pantry[aisleIdx].ings.findIndex((i) => i._id === ing._id);
-//   pantry[aisleIdx].ings.splice(ingIdx, 1);
-//   if (pantry[aisleIdx].ings.length === 0) {
-//     pantry.splice(aisleIdx, 1);
-//   }
-
-//   return user;
-// }
-function saveLocalUser(user: UserObj) {
+function saveLocalUser(user: RefubrishedUserObj) {
+  
   const { _id, fullname, imgUrl, pantry, favourites } = user;
   const newUser = {
     _id,
@@ -135,14 +103,6 @@ function saveLocalUser(user: UserObj) {
   return newUser;
 }
 
-function getLoggedinUser(): Promise<UserObj> {
-  return Promise.resolve(
-    JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
-  );
+function getLoggedinUser(): RefubrishedUserObj {
+  return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER));
 }
-
-// ;(async ()=>{
-// await userService.signup({fullname: 'Puki Norma', username: 'puki', password:'123'})
-//     await userService.signup({fullname: 'Master Adminov', username: 'admin', password:'123'})
-//     await userService.signup({fullname: 'Muki G', username: 'muki', password:'123'})
-// })()

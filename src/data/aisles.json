@@ -1,105 +1,102 @@
 [
   {
-     "name": "Vegetables & Greens",
-    "imgURL": "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407996/Recipea/vegtables-greens_euswqa.png",
-    "_id": "is2"
-   },
-    {
-      "name": "Baking",
-      "imgURL": "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407998/Recipea/baking_and_grains_posjke.png",
-      "_id": "tm4"
-    },
-    {
-      "name": "Sauces, Spreads & Dips",
-      "imgURL": "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407997/Recipea/sauces_rvet5w.png",
-      "_id": "at1"
-    },
-    {
-      "name": "Poultry",
-      "imgURL": "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407996/Recipea/game_and_fowl_zbgz76.png",
-      "_id": "sh1"
-    },
-    {
-      "name": "Canned and Jarred",
-      "imgURL": "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407997/Recipea/canned_veggies_gqt3i6.png",
-      "_id": "nm4"
-    },
-    {
-      "name": "Pasta and Rice",
-      "imgURL": "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407998/Recipea/past_eo9cso.png",
-      "_id": "go4"
-    },
-    {
-      "name": "Herbs & Spices",
-      "imgURL": "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407995/Recipea/spices_wfziev.png",
-      "_id": "s12"
-    },
-    {
-      "name": "Oils & Fats",
-      "imgURL": "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407998/Recipea/oils_eit7ik.png",
-      "_id": "pu1"
-    },
-    {
-      "name": "Vinegar, Salad Dressing",
-      "imgURL": "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407997/Recipea/salads_p5rkie.png",
-      "_id": "pu2"
-    },
-    {
-      "name": "Meat",
-      "imgURL": "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407996/Recipea/meats_vg1om2.png",
-      "_id": "yo2"
-    },
-    {
-      "name": "Wine, Beer & Spirits",
-      "imgURL": "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407997/Recipea/alcohol_l0kql0.png",
-      "_id": "sh2"
-    },
-    {
-      "name": "Nuts & Seeds",
-      "imgURL": "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407996/Recipea/seeds_a1ozzj.png",
-      "_id": "an9"
-    },
-    {
-      "name": "Beverages",
-      "imgURL": "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407996/Recipea/beverages_ierlpq.png",
-      "_id": "lj3"
-    },
-    {
-      "name": "Seafood",
-      "imgURL": "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407997/Recipea/seafood_o3agv2.png",
-      "_id": "9o9"
-    },  
-    {
-      "name": "Cheese",
-      "imgURL": "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407995/Recipea/cheese_q6s3e7.png",
-      "_id": "1k1"
-    },
-    {
-      "name": "Fruits",
-      "imgURL": "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407995/Recipea/fruits_bzm4qt.png",
-      "_id": "1d3"
-    },
-    {
-      "name": "Bread & Salty Snacks",
-      "imgURL": "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407998/Recipea/baking_flours_n7eay7.png",
-      "_id": "2k0"
-    },
-    {
-      "name": "Dairy & Eggs",
-      "imgURL": "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407998/Recipea/baking_flours_n7eay7.png",
-      "_id": "p8i"
-    },
-    {
-      "name": "Sweet & Savory Snacks",
-      "imgURL": "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407997/Recipea/desserts_and_snacks_u96y0p.png",
-      "_id": "o91"
-    },
-    {
-      "name": "Dairy-Free & Meat Substitutes",
-      "imgURL": "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407996/Recipea/lactose_free_shd1fm.png  ",
-      "_id": "ko1"
-    }
-    
-
-  ]
-  
+    "_id" : "6491ef0214f79d8fb85b0933",
+    "name" : "Vegetables & Greens",
+    "imgURL" : "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407996/Recipea/vegtables-greens_euswqa.png"
+},
+{
+    "_id" : "6491ef0214f79d8fb85b0934",
+    "name" : "Baking",
+    "imgURL" : "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407998/Recipea/baking_and_grains_posjke.png"
+},
+{
+    "_id" : "6491ef0214f79d8fb85b0935",
+    "name" : "Sauces, Spreads & Dips",
+    "imgURL" : "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407997/Recipea/sauces_rvet5w.png"
+},
+{
+    "_id" : "6491ef0214f79d8fb85b093a",
+    "name" : "Oils & Fats",
+    "imgURL" : "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407998/Recipea/oils_eit7ik.png"
+},
+{
+    "_id" : "6491ef0214f79d8fb85b093d",
+    "name" : "Wine, Beer & Spirits",
+    "imgURL" : "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407997/Recipea/alcohol_l0kql0.png"
+},
+{
+    "_id" : "6491ef0214f79d8fb85b0936",
+    "name" : "Poultry",
+    "imgURL" : "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407996/Recipea/game_and_fowl_zbgz76.png"
+},
+{
+    "_id" : "6491ef0214f79d8fb85b0939",
+    "name" : "Herbs & Spices",
+    "imgURL" : "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407995/Recipea/spices_wfziev.png"
+},
+{
+    "_id" : "6491ef0214f79d8fb85b093f",
+    "name" : "Beverages",
+    "imgURL" : "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407996/Recipea/beverages_ierlpq.png"
+},
+{
+    "_id" : "6491ef0214f79d8fb85b0944",
+    "name" : "Dairy & Eggs",
+    "imgURL" : "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407998/Recipea/baking_flours_n7eay7.png"
+},
+{
+    "_id" : "6491ef0214f79d8fb85b0946",
+    "name" : "Dairy-Free & Meat Substitutes",
+    "imgURL" : "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407996/Recipea/lactose_free_shd1fm.png  "
+},
+{
+    "_id" : "6491ef0214f79d8fb85b0937",
+    "name" : "Canned and Jarred",
+    "imgURL" : "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407997/Recipea/canned_veggies_gqt3i6.png"
+},
+{
+    "_id" : "6491ef0214f79d8fb85b0938",
+    "name" : "Pasta and Rice",
+    "imgURL" : "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407998/Recipea/past_eo9cso.png"
+},
+{
+    "_id" : "6491ef0214f79d8fb85b093c",
+    "name" : "Meat",
+    "imgURL" : "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407996/Recipea/meats_vg1om2.png"
+},
+{
+    "_id" : "6491ef0214f79d8fb85b0941",
+    "name" : "Cheese",
+    "imgURL" : "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407995/Recipea/cheese_q6s3e7.png"
+},
+{
+    "_id" : "6491ef0214f79d8fb85b0942",
+    "name" : "Fruits",
+    "imgURL" : "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407995/Recipea/fruits_bzm4qt.png"
+},
+{
+    "_id" : "6491ef0214f79d8fb85b0943",
+    "name" : "Bread & Salty Snacks",
+    "imgURL" : "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407998/Recipea/baking_flours_n7eay7.png"
+},
+{
+    "_id" : "6491ef0214f79d8fb85b093b",
+    "name" : "Vinegar, Salad Dressing",
+    "imgURL" : "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407997/Recipea/salads_p5rkie.png"
+},
+{
+    "_id" : "6491ef0214f79d8fb85b093e",
+    "name" : "Nuts & Seeds",
+    "imgURL" : "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407996/Recipea/seeds_a1ozzj.png"
+},
+{
+    "_id" : "6491ef0214f79d8fb85b0940",
+    "name" : "Seafood",
+    "imgURL" : "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407997/Recipea/seafood_o3agv2.png"
+},
+{
+    "_id" : "6491ef0214f79d8fb85b0945",
+    "name" : "Sweet & Savory Snacks",
+    "imgURL" : "https://res.cloudinary.com/dmmsf57ko/image/upload/v1684407997/Recipea/desserts_and_snacks_u96y0p.png"
+}
+]

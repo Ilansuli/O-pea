@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react"
 import MainHeader from "./MainHeader"
 import { useAppDispatch, useAppSelector } from "../hooks"
-import { selectRecipes } from "../store/reducers/recipes.slice"
+import { selectRecipes } from "../store/reducers/recipe.slice"
 import { loadRecipes, setRecipe } from "../store/actions/recipes.action"
 import { selectLoggedinUser } from "../store/reducers/user.slice"
 import RecipesList from "./RecipesList"
@@ -9,12 +9,12 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { utilService } from "../services/util.service"
 import { IngObj } from "../types/ingredient"
 import KitchenLoader from "./KitchenLoader"
-import { recipeObj } from "../types/recipe"
+import { RecipeObj } from "../types/recipe"
 import { toggleFavourite } from "../store/actions/user.action"
-
+import { useDispatch } from "react-redux"
 const RecipesIndex: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const dispatch = useAppDispatch()
+  const dispatch = useDispatch()
   const recipes = useAppSelector(selectRecipes)
   const loggedinUser = useAppSelector(selectLoggedinUser)
   const { pantry } = loggedinUser
@@ -42,7 +42,7 @@ const RecipesIndex: React.FC = () => {
   const onSetCurrRecipe = (recipeId: string) => {
     dispatch(setRecipe(recipeId))
   }
-  const onToggleFavourite = (recipe: recipeObj) => {
+  const onToggleFavourite = (recipe: RecipeObj) => {
     dispatch(toggleFavourite(recipe))
   }
   return (

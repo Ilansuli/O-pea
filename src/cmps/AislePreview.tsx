@@ -7,6 +7,7 @@ import SvgIcon from "./SvgIcon"
 import { useAppDispatch, useAppSelector } from "../hooks"
 import { selectLoggedinUser } from "../store/reducers/user.slice"
 import { removeIngFromPantry } from "../store/actions/user.action"
+import { ingredientService } from "../services/ingredient.service"
 type AislePreviewProps = {
   aisle: AisleObj,
   onHandleIng?: (ing: IngObj, isSelected: boolean) => void
@@ -25,6 +26,7 @@ const AislePreview: React.FC<AislePreviewProps> = ({ aisle, onHandleIng, isUserP
   }, [])
 
   const loadIngredients = () => {
+    const ingredients = ingredientService.getIngredients()
     const filteredIngs = ingredients.filter((ing: IngObj) => {
       return ing.aisleId === aisle._id
     })
@@ -64,7 +66,7 @@ const AislePreview: React.FC<AislePreviewProps> = ({ aisle, onHandleIng, isUserP
             aisle.ings.map((ing) => (
               <div key={ing._id} className="ing-preview">
                 <p className="ing-preview-name">{ing.name}</p>
-                <SvgIcon onClick={async () => dispatch(removeIngFromPantry(ing))} iconName="trash" className="trash-icon" />
+                <SvgIcon onClick={() => dispatch(removeIngFromPantry(ing))} iconName="trash" className="trash-icon" />
               </div>
             ))
           ) :

@@ -21,13 +21,11 @@
 @import "components/SearchInput";
 @import "components/KitchenLoader";
 @import "components/LoginSignup";
+@import "components/MobileFooter";
 
 
 // views
 @import "views/AppIndex";
-@import "views/app-feed";
-@import "views/user-area";
-@import "views/post-details";
+@import "views/Home";
 @import "views/login";
-@import "views/user-Story";
 

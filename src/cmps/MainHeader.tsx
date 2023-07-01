@@ -1,11 +1,13 @@
 import SvgIcon from "./SvgIcon"
 import { selectIsUserPantry, selectLoggedinUser } from "../store/reducers/user.slice";
-import { clearPantry, togglePantry,logout } from "../store/actions/user.action";
+import { clearPantry, togglePantry, setLoggedinUser } from "../store/actions/user.action";
 import { useAppDispatch, useAppSelector, useClickOutside } from "../hooks";
 import { useState, useRef } from 'react'
 import SearchInput from "./SearchInput";
-import { selectRecipes } from "../store/reducers/recipes.slice";
+import { selectRecipes } from "../store/reducers/recipe.slice";
 import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { userService } from "../services/user.service";
 type MainHeaderProps = {
   isPantry: boolean
   isFavourites?: boolean
@@ -32,7 +34,9 @@ const MainHeader: React.FC<MainHeaderProps> = ({ isPantry, isFavourites }) => {
   }
   const handleLogout = () => {
     setIsUserMenu(false)
-    dispatch(logout())
+    userService.logout();
+    const guestUser = userService.getGuestUser();
+    dispatch(setLoggedinUser(guestUser))
   }
   return (
     <section className="main-header">

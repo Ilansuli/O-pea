@@ -1,4 +1,9 @@
 .aisle-preview {
+  @include for-narrow-layout{
+    &:last-of-type{
+      padding-block-end: 42px;
+    }
+  }
   &.user {
     border-radius: unset;
     box-shadow: unset;
@@ -16,10 +21,10 @@
         width: 20px;
         height: 20px;
         justify-self: center;
-        svg{
+        svg {
           cursor: pointer;
-          &:hover{
-            path{
+          &:hover {
+            path {
               stroke: red;
               fill: red;
             }
@@ -43,6 +48,13 @@
     justify-items: flex-start;
     align-items: center;
     grid-template-columns: 0.45fr 1fr 0.25fr;
+    @include for-narrow-layout {
+      grid-template-columns: 0.15fr 1fr 0.05fr;
+    }
+    @include for-mobile-layout {
+      grid-template-columns: 0.15fr 1fr 0.15fr;
+    }
+    
     .aisle-name-container {
       display: flex;
       flex-direction: column;

@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 import { UserCred } from "../types/user";
 import { useAppDispatch } from "../hooks";
-import { loadUsers, login, signup } from "../store/actions/user.action";
+import { loadUsers, login, setLoggedinUser, signup } from "../store/actions/user.action";
 import { useLocation, NavLink, useNavigate } from "react-router-dom";
 import SvgIcon from "./SvgIcon";
 import { userService } from "../services/user.service";
 
 const LoginSignup: React.FC = ({ }) => {
-    const [cred, setCred] = useState<UserCred>({ username: '', password: '' })
+    const [cred, setCred] = useState<UserCred>({ username: '', password: '', fullname: '' })
     const [isLogin, setIsLogin] = useState<boolean>(false)
-    const [isErr, setIsErr] = useState<{ [key: string]: boolean }>({ isUsernameErr: false, isPasswordErr: false })
+    const [isLoginErr, setIsLoginErr] = useState<boolean>(false)
+    const [isSignupErr, setIsSignupErr] = useState<{ [key: string]: boolean }>({ usernameErr: false, fullnameErr: false })
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const { pathname } = useLocation()
@@ -20,20 +21,15 @@ const LoginSignup: React.FC = ({ }) => {
         return () => {
         }
     }, [pathname])
-
-    const onLogin = async (ev: React.FormEvent<HTMLFormElement>) => {
+    const onHandleSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
         ev.preventDefault();
-        const user = await dispatch(login(cred))
+        const user = await dispatch(isLogin ? login(cred) : signup(cred))
+        if (user) {
+            return navigate('/')
+        }
         console.log(user);
-        
-        if (!user) return setIsErr({ isUsernameErr: true, isPasswordErr: true })
-        navigate('/')
-    }
-    const onSignUp = (ev: React.FormEvent<HTMLFormElement>) => {
-        ev.preventDefault();
-        dispatch(signup(cred))
-        navigate('/')
 
+        isLogin ? setIsLoginErr(true) : setIsSignupErr(cred.fullname !== '' ? { ...isSignupErr, usernameErr: true } : { ...isSignupErr, fullnameErr: true })
     }
     return (
         <div className="scroll-placeholder col-2">
@@ -50,13 +46,25 @@ const LoginSignup: React.FC = ({ }) => {
                         </div>
                     </header>
                     <div className="form-wrapper">
-                        <form onSubmit={isLogin ? onLogin : onSignUp}>
+                        <form onSubmit={onHandleSubmit}>
                             {!isLogin &&
-                                <input type="text" placeholder="Fullname" value={cred.fullname} onChange={(ev) => setCred((prevState) => ({ ...prevState, fullname: ev.target.value }))} />
+                                <input type="text" className={isSignupErr.fullnameErr ? 'input-err' : ''} placeholder="Fullname" value={cred.fullname} onChange={(ev) => setCred((prevState) => ({ ...prevState, fullname: ev.target.value }))} />
                             }
-                            <input type="text" className={isErr.isUsernameErr ? 'input-err' : ''} placeholder="Username" value={cred.username} onChange={(ev) => setCred((prevState) => ({ ...prevState, username: ev.target.value }))} />
-                            <input type="password" className={isErr.isPasswordErr ? 'input-err' : ''} placeholder="Password" value={cred.password} onChange={(ev) => setCred((prevState) => ({ ...prevState, password: ev.target.value }))} />
+                            {isSignupErr.fullnameErr &&
+                                <div className="err-msg">
+                                    <SvgIcon iconName="exclamMark" className="exclam-mark-icon" />
+                                    <p>Please enter full name</p>
+                                </div>}
 
+
+                            <input type="text" className={isLoginErr || isSignupErr.usernameErr ? 'input-err' : ''} placeholder="Username" value={cred.username} onChange={(ev) => setCred((prevState) => ({ ...prevState, username: ev.target.value }))} />
+                            <input type="password" className={isLoginErr ? 'input-err' : ''} placeholder="Password" value={cred.password} onChange={(ev) => setCred((prevState) => ({ ...prevState, password: ev.target.value }))} />
+                            {isLoginErr || isSignupErr.usernameErr &&
+                                <div className="err-msg">
+                                    <SvgIcon iconName="exclamMark" className="exclam-mark-icon" />
+                                    {isLoginErr ? <p>Wrong username or password</p> : <p>This username is already taken</p>}
+                                </div>
+                            }
                             <button type="submit">
                                 {isLogin ? 'Login' : 'Signup'}
                             </button>
