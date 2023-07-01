@@ -1,8 +1,6 @@
-type KitchenLoaderProps = {
 
-};
 
-const KitchenLoader: React.FC<KitchenLoaderProps> = ({ }) => {
+const KitchenLoader: React.FC = ({ }) => {
     return (
         <div id="loading">
             <div id="loading--inner" className="loading--inner">

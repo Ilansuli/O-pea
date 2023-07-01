@@ -1,6 +1,8 @@
-import { Key, useState, useEffect } from "react"
-import { IngObj } from "../types/ingredient"
 import { useAppSelector } from "../hooks"
+import { Key, useState } from "react"
+
+import { IngObj } from "../types/ingredient"
+
 import { selectLoggedinUser } from "../store/reducers/user.slice"
 
 type IngBtnProps = {
@@ -14,7 +16,7 @@ const IngBtn: React.FC<IngBtnProps> = ({ ing, onHandleIng }) => {
   let isIngInPantry = pantry.some(aisle => aisle.ings.some(i => i._id === ing._id))
   let ingClassName = isIngInPantry ? 'selected' : 'not-selected'
 
-  const handleIng = (ing: IngObj, isIngInPantry: boolean) => {
+  const handleIng = (ing: IngObj, isIngInPantry: boolean): void => {
     setIsIngActive(!isIngActive)
     onHandleIng(ing, isIngInPantry)
   }

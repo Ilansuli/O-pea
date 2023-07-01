@@ -1,22 +1,22 @@
 import { NavLink, useLocation } from "react-router-dom";
-import SvgIcon from "./SvgIcon";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import { selectLoggedinUser } from "../store/reducers/user.slice";
+
 import { userService } from "../services/user.service";
+
+import SvgIcon from "./SvgIcon";
+
+import { selectLoggedinUser } from "../store/reducers/user.slice";
 import { setLoggedinUser } from "../store/actions/user.action";
 
-type MobileFooterProps = {
 
-};
-
-const MobileFooter: React.FC<MobileFooterProps> = ({ }) => {
+const MobileFooter: React.FC = ({ }) => {
     const dispatch = useAppDispatch()
     const location = useLocation();
     const currentPath = location.pathname;
     const loggedinUser = useAppSelector(selectLoggedinUser)
 
 
-    const handleLogout = () => {
+    const handleLogout = (): void => {
         userService.logout();
         const guestUser = userService.getGuestUser();
         dispatch(setLoggedinUser(guestUser))

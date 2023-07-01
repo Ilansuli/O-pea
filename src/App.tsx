@@ -1,12 +1,14 @@
+import { useEffect } from 'react'
+import { useAppDispatch } from "./hooks";
+
+import { userService } from "./services/user.service";
+
+import AppIndex from "./views/AppIndex";
+
+import { loadUsers, setLoggedinUser } from "./store/actions/user.action";
 
 import "./assets/styles/styles.scss";
 import 'react-lazy-load-image-component/src/effects/blur.css'
-import { useEffect } from 'react'
-import { useAppDispatch, useWindowSize, } from "./hooks";
-import { loadUsers, setLoggedinUser } from "./store/actions/user.action";
-import AppIndex from "./views/AppIndex";
-import { userService } from "./services/user.service";
-import { useNavigate } from "react-router-dom";
 
 const App = () => {
   const dispatch = useAppDispatch()

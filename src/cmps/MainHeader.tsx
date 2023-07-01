@@ -1,13 +1,16 @@
+import { useState } from 'react'
+import { NavLink } from "react-router-dom";
+import { useAppDispatch, useAppSelector, useClickOutside } from "../hooks";
+
+import { userService } from "../services/user.service";
+
 import SvgIcon from "./SvgIcon"
+import SearchInput from "./SearchInput";
+
 import { selectIsUserPantry, selectLoggedinUser } from "../store/reducers/user.slice";
 import { clearPantry, togglePantry, setLoggedinUser } from "../store/actions/user.action";
-import { useAppDispatch, useAppSelector, useClickOutside } from "../hooks";
-import { useState, useRef } from 'react'
-import SearchInput from "./SearchInput";
 import { selectRecipes } from "../store/reducers/recipe.slice";
-import { NavLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { userService } from "../services/user.service";
+
 type MainHeaderProps = {
   isPantry: boolean
   isFavourites?: boolean
@@ -25,14 +28,14 @@ const MainHeader: React.FC<MainHeaderProps> = ({ isPantry, isFavourites }) => {
   const pantryMenuRef = useClickOutside(() => setIsPantryMenu(false));
   const userMenuRef = useClickOutside(() => setIsUserMenu(false));
 
-  const handleHamburgerClick = () => {
+  const handleHamburgerClick = (): void => {
     dispatch(togglePantry())
   }
-  const clearOutPantry = () => {
+  const clearOutPantry = (): void => {
     dispatch(clearPantry())
     setIsPantryMenu(false)
   }
-  const handleLogout = () => {
+  const handleLogout = (): void => {
     setIsUserMenu(false)
     userService.logout();
     const guestUser = userService.getGuestUser();

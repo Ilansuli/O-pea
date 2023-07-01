@@ -1,16 +1,26 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import {
+  combineReducers,
+  configureStore,
+  ThunkAction,
+  Action,
+  compose,
+} from "@reduxjs/toolkit";
+
 import recipeSlice from "./reducers/recipe.slice";
-import { ThunkAction, Action } from "@reduxjs/toolkit";
-import { compose } from "@reduxjs/toolkit";
 import userSlice from "./reducers/user.slice";
-const rootReducer = combineReducers({ recipe: recipeSlice, user: userSlice });
+const rootReducer = combineReducers({
+  recipe: recipeSlice.reducer,
+  user: userSlice.reducer,
+});
+// const rootReducer =
+//   combineReducers({ recipe: recipeSlice, user: userSlice });
 declare global {
   interface Window {
     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
   }
 }
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export const store = configureStore({
   reducer: rootReducer,
@@ -29,23 +39,3 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   unknown,
   Action<string>
 >;
-
-// import {
-//   applyMiddleware,
-//   combineReducers,
-//   compose,
-//   legacy_createStore as createStore,
-// } from "redux";
-// import thunk from "redux-thunk";
-// // import { recipeReducer } from './reducers/recipes.reducer'
-// import { userReducer } from "./reducers/user.reducer";
-// import recipeSlice from "./reducers/recipe.slice";
-
-// const rootReducer = combineReducers({
-//   recipeModule: recipeSlice,
-//   userModule: userReducer,
-// });
-// export const store = createStore(
-//   rootReducer,
-//   composeEnhancers(applyMiddleware(thunk))
-// );

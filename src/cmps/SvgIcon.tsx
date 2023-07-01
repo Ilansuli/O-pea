@@ -1,6 +1,7 @@
 import React from 'react';
-import { svgService } from '../services/svg.service';
 import { MouseEvent } from 'react';
+
+import { svgService } from '../services/svg.service';
 
 type SvgIconProps = {
     iconName: string,

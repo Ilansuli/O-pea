@@ -2,14 +2,16 @@ import { useState, useEffect, Key } from "react";
 import { useAppSelector, useAppDispatch } from "../hooks";
 
 import { AisleObj } from "../types/aisle";
+import { IngObj } from "../types/ingredient";
+
+import { aisleService } from "../services/aisle.service";
+import { utilService } from "../services/util.service";
 
 import MainHeader from "./MainHeader"
 import AislePreview from "./AislePreview"
-import { aisleService } from "../services/aisle.service";
+
 import { selectIsUserPantry, selectLoggedinUser } from "../store/reducers/user.slice";
 import { addIngToPantry, removeIngFromPantry } from "../store/actions/user.action";
-import { IngObj } from "../types/ingredient";
-import { utilService } from "../services/util.service";
 
 const Pantry: React.FC = () => {
   const [aisles, setAisles] = useState<AisleObj[]>([])
@@ -22,11 +24,11 @@ const Pantry: React.FC = () => {
     return () => {
     }
   }, [])
-  const loadAisles = () => {
+  const loadAisles = (): void => {
     const aisles: AisleObj[] = aisleService.getAisles()
     setAisles(aisles)
   }
-  const handleIng = (ing: IngObj, isIngInPantry: boolean) => {
+  const handleIng = (ing: IngObj, isIngInPantry: boolean): void => {
     isIngInPantry ? dispatch(removeIngFromPantry(ing)) : utilService.debounce(dispatch(addIngToPantry(ing)), 1000)
   }
   if (aisles.length === 0) return <div>Loading...</div>

@@ -1,14 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { UserObj, RefubrishedUserObj } from "../../types/user";
-import { userService } from "../../services/user.service";
-import { aisleService } from "../../services/aisle.service";
-import { useAppSelector } from "../../hooks";
-import { actionTypes } from "../constants/action.types";
-import { IngObj } from "../../types/ingredient";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
+import { RefubrishedUserObj } from "../../types/user";
 import { RecipeObj } from "../../types/recipe";
-import { RootState } from "../store";
-import { PayloadAction } from "@reduxjs/toolkit";
 import { AisleArr } from "../../types/aisle";
+
+import { RootState } from "../store";
 interface UsersState {
   users: any[];
   loggedinUser: RefubrishedUserObj;
@@ -47,14 +43,15 @@ export const userSlice = createSlice({
     UPDATE_PANTRY: (state: UsersState, action: PayloadAction<AisleArr>) => {
       state.loggedinUser.pantry = action.payload;
     },
-    UPDATE_FAVOURITES: (state: UsersState, action: PayloadAction<RecipeObj[]>) => {
+    UPDATE_FAVOURITES: (
+      state: UsersState,
+      action: PayloadAction<RecipeObj[]>
+    ) => {
       state.loggedinUser.favourites = action.payload;
       console.log(state.loggedinUser.favourites);
-      
     },
     HANDLE_IS_USER_PANTRY: (state: UsersState) => {
       state.isUserPantry = !state.isUserPantry;
-      
     },
   },
 });
@@ -70,4 +67,4 @@ export const {
 export const selectLoggedinUser = (state: RootState) => state.user.loggedinUser;
 export const selectIsUserPantry = (state: RootState) => state.user.isUserPantry;
 
-export default userSlice.reducer;
+export default userSlice;

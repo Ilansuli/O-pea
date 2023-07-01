@@ -1,5 +1,5 @@
-import { setCurrRecipe } from "../store/reducers/recipe.slice";
 import { RecipeObj } from "../types/recipe";
+
 import RecipePreview from "./RecipePreview";
 
 type RecipesListProps = {

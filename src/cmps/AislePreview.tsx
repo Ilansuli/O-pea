@@ -1,12 +1,15 @@
+import { useEffect, useState } from "react"
+import { useAppDispatch, useAppSelector } from "../hooks"
+
 import { AisleObj } from "../types/aisle"
 import { IngObj } from "../types/ingredient"
-import ingredients from '../data/ingredients.json'
-import { useEffect, useState, Key } from "react"
+
 import IngBtn from "./IngBtn"
 import SvgIcon from "./SvgIcon"
-import { useAppDispatch, useAppSelector } from "../hooks"
+
 import { selectLoggedinUser } from "../store/reducers/user.slice"
 import { removeIngFromPantry } from "../store/actions/user.action"
+
 import { ingredientService } from "../services/ingredient.service"
 type AislePreviewProps = {
   aisle: AisleObj,
@@ -25,7 +28,7 @@ const AislePreview: React.FC<AislePreviewProps> = ({ aisle, onHandleIng, isUserP
     }
   }, [])
 
-  const loadIngredients = () => {
+  const loadIngredients = (): void => {
     const ingredients = ingredientService.getIngredients()
     const filteredIngs = ingredients.filter((ing: IngObj) => {
       return ing.aisleId === aisle._id
@@ -33,7 +36,7 @@ const AislePreview: React.FC<AislePreviewProps> = ({ aisle, onHandleIng, isUserP
     setIngs(filteredIngs)
   }
 
-  const countAisleIngsInPantry = () => {
+  const countAisleIngsInPantry = (): number | string => {
     let aisleInPantry = pantry.find(a => a._id === aisle._id)
     return aisleInPantry ? aisleInPantry.ings.length : '0'
   }

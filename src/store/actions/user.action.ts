@@ -1,19 +1,13 @@
 import { Dispatch } from "@reduxjs/toolkit";
-import { userService } from "../../services/user.service";
-import { RefubrishedUserObj, UserCred, UserObj } from "../../types/user";
-//   addIng,
-//   clearOutPantry,
-//   handleIsUserPantry,
-//   removeIng,
-//   setLoggedinUser,
-//   setUsers,
-//   toggleFavouriteRecipe,
-// } from "../reducers/user.reducer";
+import { RefubrishedUserObj, UserCred } from "../../types/user";
+
 import { IngObj } from "../../types/ingredient";
 import { RecipeObj } from "../../types/recipe";
-import { actionTypes } from "../constants/action.types";
-import { AisleArr, AisleObj } from "../../types/aisle";
+import { AisleObj } from "../../types/aisle";
+
 import { aisleService } from "../../services/aisle.service";
+import { userService } from "../../services/user.service";
+
 import { RootState } from "../store";
 import {
   SET_LOGGEDIN_USER,
@@ -60,7 +54,7 @@ export const loadUsers = () => {
       const users = await userService.getUsers();
       dispatch(SET_USERS(users));
     } catch (err) {
-      console.log("Can\t load users,user.action/loadUsers ", err);
+      console.log("Can't load users,user.action/loadUsers ", err);
     }
   };
 };
@@ -77,7 +71,7 @@ export const addIngToPantry = (ing: IngObj) => {
         let aisle: AisleObj;
         //Add Aisle + Ing to the pantry
         if (aisleIdx === -1) {
-          aisle =  aisleService.getAisleById(ing.aisleId);
+          aisle = aisleService.getAisleById(ing.aisleId);
           aisle.ings = [ing];
           pantry.push(aisle);
           //Add Ing to existing Aisle
@@ -162,7 +156,7 @@ export const toggleFavourite = (recipe: RecipeObj) => {
           (favourites = favourites.filter(
             (recipe) => recipe._id !== favourites[recipeIdx]._id
           ));
-            
+
       dispatch(UPDATE_FAVOURITES(favourites));
       if (state.user.loggedinUser._id !== "0000")
         userService.updateUser({ ...state.user.loggedinUser, favourites });

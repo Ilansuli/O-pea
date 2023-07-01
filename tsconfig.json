@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "module": "ES6",
+    // "module": "ES6",
+    "module": "es2020",
+
     "jsx": "react-jsx",
     "rootDir": "./src",
     "outDir": "./dist",
@@ -16,5 +18,5 @@
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx"
-, "src/services/recipe.service.js", "src/services/recipe.service.js"  ]
+, "src/services/recipe.service.ts", "src/services/recipe.service.ts"  ]
 }

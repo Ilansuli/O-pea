@@ -1,13 +1,16 @@
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import { useAppDispatch, useAppSelector } from "../hooks";
-import { selectCurrRecipe, selectRecipes } from "../store/reducers/recipe.slice";
-import SvgIcon from "./SvgIcon";
-import { setRecipe } from "../store/actions/recipes.action";
-import RecipePreview from "./RecipePreview";
 import { useRef, useState } from 'react'
-import KitchenLoader from "./KitchenLoader";
-import { selectLoggedinUser } from "../store/reducers/user.slice";
+import { useAppDispatch, useAppSelector } from "../hooks";
+
 import { RecipeObj } from "../types/recipe";
+
+import SvgIcon from "./SvgIcon";
+import RecipePreview from "./RecipePreview";
+import KitchenLoader from "./KitchenLoader";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
+import { selectCurrRecipe, selectRecipes } from "../store/reducers/recipe.slice";
+import { setRecipe } from "../store/actions/recipes.action";
+import { selectLoggedinUser } from "../store/reducers/user.slice";
 import { toggleFavourite } from "../store/actions/user.action";
 
 const SideDrawer: React.FC = ({ }) => {
@@ -19,17 +22,17 @@ const SideDrawer: React.FC = ({ }) => {
     const isFavourite = recipe ? favourites.some(r => r._id === recipe._id) : false
     const drawerRef = useRef<HTMLDivElement>(null);
 
-    const closeDrawer = () => {
+    const closeDrawer = ():void => {
         dispatch(setRecipe('-1'))
     }
-    const onSetCurrRecipe = (recipeId: string) => {
+    const onSetCurrRecipe = (recipeId: string):void => {
         setIsLoading(true)
         if (drawerRef.current) {
             drawerRef.current.scrollTo({ top: 0, behavior: "smooth" });
         }
         dispatch(setRecipe(recipeId)).then(() => setIsLoading(false))
     }
-    const onToggleFavourite = (recipe: RecipeObj) => {
+    const onToggleFavourite = (recipe: RecipeObj):void => {
         dispatch(toggleFavourite(recipe))
     }
     if (!recipe) return <div className="d"></div>

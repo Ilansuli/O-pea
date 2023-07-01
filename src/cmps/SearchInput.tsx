@@ -1,14 +1,18 @@
+import { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector, useClickOutside } from "../hooks";
+
+import { IngObj } from "../types/ingredient";
+import { RecipeObj } from "../types/recipe";
+
 import { ingredientService } from "../services/ingredient.service";
 import { recipeService } from "../services/recipe.service";
-import { utilService } from "../services/util.service";
+
+import SvgIcon from "./SvgIcon";
+
 import { setRecipe } from "../store/actions/recipes.action";
 import { addIngToPantry, removeIngFromPantry } from "../store/actions/user.action";
 import { selectLoggedinUser } from "../store/reducers/user.slice";
-import { IngObj } from "../types/ingredient";
-import { RecipeObj } from "../types/recipe";
-import SvgIcon from "./SvgIcon";
-import { useEffect, useState } from 'react'
+
 type SearchInputProps = {
     isPantry: boolean
 };
@@ -24,15 +28,14 @@ const SearchInput: React.FC<SearchInputProps> = ({ isPantry }) => {
 
     const { searchValue, searchResults } = searchHandler
 
-    const ings = ingredientService.getIngredients()
     const pantry = useAppSelector(selectLoggedinUser).pantry
 
-    const handleInputFocus = () => {
+    const handleInputFocus = (): void => {
         setIsInputFocused(!isInputFocused);
     };
 
 
-    const handleSearchResult = (res: IngObj | { name: string, _id: string }) => {
+    const handleSearchResult = (res: IngObj | { name: string, _id: string }): void => {
         isPantry ?
             isIngInPantry(res as IngObj) ? dispatch(removeIngFromPantry(res as IngObj)) : dispatch(addIngToPantry(res as IngObj))
             :
@@ -40,11 +43,11 @@ const SearchInput: React.FC<SearchInputProps> = ({ isPantry }) => {
 
         resetSearchResults()
     }
-    const resetSearchResults = () => {
+    const resetSearchResults = (): void => {
 
         setSearchHandler(() => ({ searchResults: [], searchValue: '' }))
     }
-    const onSearchResults = async () => {
+    const onSearchResults = async (): Promise<void> => {
         let res: IngObj[] | RecipeObj[]
 
         if (searchValue.trim() === '') return resetSearchResults()
@@ -67,7 +70,7 @@ const SearchInput: React.FC<SearchInputProps> = ({ isPantry }) => {
         };
     }, [searchValue]);
 
-    const isIngInPantry = (ing: IngObj) => {
+    const isIngInPantry = (ing: IngObj): boolean => {
         return pantry.some(aisle => aisle.ings.some(i => i._id === ing._id))
     }
 

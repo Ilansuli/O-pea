@@ -1,8 +1,11 @@
-import { RecipeObj } from "../types/recipe";
-import SvgIcon from "./SvgIcon";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import { MouseEvent } from 'react';
 import { useAppSelector } from "../hooks";
+
+import { RecipeObj } from "../types/recipe";
+
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import SvgIcon from "./SvgIcon";
+
 import { selectLoggedinUser } from "../store/reducers/user.slice";
 
 type RecipePreviewProps = {
@@ -14,7 +17,7 @@ type RecipePreviewProps = {
 const RecipePreview: React.FC<RecipePreviewProps> = ({ recipe, onSetCurrRecipe, onToggleFavourite }) => {
     const favourites = useAppSelector(selectLoggedinUser).favourites
     const isFavourite = favourites.some(r => r._id === recipe._id)
-    const handleFavourite = (ev: MouseEvent<HTMLButtonElement>) => {
+    const handleFavourite = (ev: MouseEvent<HTMLButtonElement>): void => {
         ev.stopPropagation()
         onToggleFavourite(recipe)
     }

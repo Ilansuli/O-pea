@@ -1,21 +1,22 @@
 import { useAppDispatch, useAppSelector } from "../hooks";
-import { setRecipe } from "../store/actions/recipes.action";
-import { toggleFavourite } from "../store/actions/user.action";
-import { selectLoggedinUser } from "../store/reducers/user.slice";
+
 import { RecipeObj } from "../types/recipe";
+
 import MainHeader from "./MainHeader";
 import RecipesList from "./RecipesList";
 
-type FavouritesIndexProps = {
+import { setRecipe } from "../store/actions/recipes.action";
+import { toggleFavourite } from "../store/actions/user.action";
+import { selectLoggedinUser } from "../store/reducers/user.slice";
 
-};
 
-const FavouritesIndex: React.FC<FavouritesIndexProps> = ({ }) => {
+
+const FavouritesIndex: React.FC = ({ }) => {
     const dispatch = useAppDispatch()
-    const onSetCurrRecipe = (recipeId: string) => {
+    const onSetCurrRecipe = (recipeId: string): void => {
         dispatch(setRecipe(recipeId))
     }
-    const onToggleFavourite = (recipe: RecipeObj) => {
+    const onToggleFavourite = (recipe: RecipeObj): void => {
         dispatch(toggleFavourite(recipe))
     }
     const favourites = useAppSelector(selectLoggedinUser).favourites

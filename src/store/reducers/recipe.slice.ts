@@ -1,36 +1,35 @@
-import { RootState } from '../store';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { recipeService } from '../../services/recipe.service';
-import { Dispatch } from 'react';
-import { RecipeObj } from '../../types/recipe';
+import { createSlice } from "@reduxjs/toolkit";
 
+import { RecipeObj } from "../../types/recipe";
+
+import { RootState } from "../store";
 
 export interface RecipesState {
-    recipes: RecipeObj[]
-    currRecipe: RecipeObj | null
+  recipes: RecipeObj[];
+  currRecipe: RecipeObj | null;
 }
 
 const initialState: RecipesState = {
-    recipes: [],
-    currRecipe : null
-}
+  recipes: [],
+  currRecipe: null,
+};
 
 export const recipesSlice = createSlice({
-    name: 'recipes',
-    initialState,
-    reducers: {
-            setRecipes: (state, action) => {
-                state.recipes = action.payload;
-            },
-            setCurrRecipe:(state,action)=>{
-                state.currRecipe = action.payload
-            }
-        }
-    })
+  name: "recipes",
+  initialState,
+  reducers: {
+    SET_RECIPES: (state, action) => {
+      state.recipes = action.payload;
+    },
+    SET_CURR_RECIPE: (state, action) => {
+      state.currRecipe = action.payload;
+    },
+  },
+});
 
-export const { setRecipes,setCurrRecipe } = recipesSlice.actions
+export const { SET_RECIPES, SET_CURR_RECIPE } = recipesSlice.actions;
 
-export const selectRecipes = (state: RootState) => state.recipe.recipes
-export const selectCurrRecipe = (state: RootState) => state.recipe.currRecipe
+export const selectRecipes = (state: RootState) => state.recipe.recipes;
+export const selectCurrRecipe = (state: RootState) => state.recipe.currRecipe;
 
-export default recipesSlice.reducer
+export default recipesSlice;

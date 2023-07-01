@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
-import { UserCred } from "../types/user";
 import { useAppDispatch } from "../hooks";
-import { loadUsers, login, setLoggedinUser, signup } from "../store/actions/user.action";
 import { useLocation, NavLink, useNavigate } from "react-router-dom";
+
+import { UserCred } from "../types/user";
+
 import SvgIcon from "./SvgIcon";
-import { userService } from "../services/user.service";
+
+import { loadUsers, login, signup } from "../store/actions/user.action";
 
 const LoginSignup: React.FC = ({ }) => {
     const [cred, setCred] = useState<UserCred>({ username: '', password: '', fullname: '' })
@@ -21,7 +23,7 @@ const LoginSignup: React.FC = ({ }) => {
         return () => {
         }
     }, [pathname])
-    const onHandleSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
+    const onHandleSubmit = async (ev: React.FormEvent<HTMLFormElement>): Promise<void> => {
         ev.preventDefault();
         const user = await dispatch(isLogin ? login(cred) : signup(cred))
         if (user) {
