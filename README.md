@@ -2,14 +2,11 @@
   <p>To use O-pea, please visit the following link:</p>
   <a href="https://o-pea-app-cd5a.onrender.com/">https://o-pea-app-cd5a.onrender.com/</a>
    <img src="https://res.cloudinary.com/dmmsf57ko/image/upload/v1686953338/O-pea_logo-removebg-preview_dsqizt.png" width="20%" />
-  <p>Satisfy is an end-to-end project based on the famous Spotify app that allows users to sign up, log in, and build their own playlists with their desired songs. The app also features real-time synchronization with mobile devices using sockets and is fully responsive. Additionally, the app utilizes YouTube's API to retrieve song information and integrate YouTube videos.</p>
-  <p>This project was created in collaboration with Darnell Green and Amit Cohen.</p>
-
+<p>O-pea is an end-to-end Project that revolutionizes recipe discovery by offering a convenient and personalized experience. With a focus on pantry-based cooking, it allows users to explore an extensive database of recipes tailored to the ingredients they already have. Say goodbye to food waste and hello to delicious meals with O-pea's intuitive interface and smart ingredient matching system.</p>
   <h2>Features</h2>
   <ul>
-    <li>User authentication: Users can sign up and log in to the app to access their playlists.</li>
-    <li>Playlist creation: Users can create their own playlists by adding songs from the app's library, which includes song information and YouTube videos.</li>
-    <li>Real-time synchronization: Users can sync their playlists with their mobile devices using sockets.</li>
+    <li>Pantry-Based Recipe Search: Users can search for recipes based on the ingredients they have in their pantry. The app generates a curated list of recipes that can be made using those items, making meal planning easier and reducing food waste.</li>
+    <li>User authentication: Users can sign up and log in to the app to access their favourtie recipes.</li>
     <li>Fully responsive: The app is designed to work seamlessly across all screen sizes and devices.</li>
   </ul>
 
@@ -18,12 +15,12 @@
   <ul>
     <li>Node.js</li>
     <li>Express</li>
-    <li>Socket.io</li>
-    <li>Vue.js</li>
-    <li>Vuex</li>
+<li>TypeScript</li>
+    <li>React.js</li>
+    <li>Redux</li>
     <li>Sass</li>
     <li>MongoDB</li>
-    <li>YouTube API</li>
+    <li>Spoonacular API</li>
   </ul>
   <img src="https://res.cloudinary.com/dmmsf57ko/image/upload/v1688390117/WhatsApp_Image_2023-07-03_at_16.06.55_opabvb.jpg"/>
   <img src="https://res.cloudinary.com/dmmsf57ko/image/upload/v1688390118/WhatsApp_Image_2023-07-03_at_16.08.31_z3eubp.jpg"/>
