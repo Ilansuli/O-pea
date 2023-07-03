@@ -1,3 +1,4 @@
+import { log } from "console";
 import ingredients from "../data/ingredients.json";
 import { IngObj } from "../types/ingredient";
 // import { httpService } from "./http.service";
@@ -5,14 +6,15 @@ export const ingredientService = {
   getIngredients,
   searchIng,
 };
+
 function getIngredients(): IngObj[] {
   // return await httpService.get("ingredient");
   return ingredients;
 }
 
 function searchIng(searchValue: string) {
-  const filteredIngs = getIngredients();
-  filteredIngs
+  let filteredIngs = getIngredients();
+  filteredIngs = filteredIngs
     .filter((ingredient) =>
       ingredient.name.toLowerCase().includes(searchValue.toLowerCase())
     )
@@ -37,5 +39,7 @@ function searchIng(searchValue: string) {
         return 0;
       }
     });
+  console.log(filteredIngs);
+
   return filteredIngs;
 }

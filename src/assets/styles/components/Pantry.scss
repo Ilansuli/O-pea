@@ -1,3 +1,10 @@
 .pantry-index {
   @include app-index-section;
+  .grocery-bag-img{
+    width: 100px;
+    height: 100px;
+
+  }
 }
+
+

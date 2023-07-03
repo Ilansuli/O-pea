@@ -2,38 +2,57 @@
   @include app-index-section;
   h4 {
     font-size: 34px;
-    @include for-narrow-layout{
+    @include for-narrow-layout {
       font-size: 27px;
     }
-    @include for-mobile-layout{
+    @include for-mobile-layout {
       font-size: 20px;
     }
     color: #4f5059;
     font-weight: 400;
   }
-  
-  .empty-pantry-msg {
+
+  // @include for-narrow-layout {
+  //   display: none;
+
+  // }
+}
+
+.empty-pantry-msg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: linear-gradient(
+      180deg,
+      hsla(0, 0%, 100%, 0.7),
+      hsla(0, 0%, 100%, 0.7)
+    ),
+    url(https://res.cloudinary.com/dmmsf57ko/image/upload/v1685632878/onboarding-bg_lf354f.svg);
+  background-position: 0px 0px, 50% 0%;
+  background-size: auto, auto;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+  padding-block-start: 60px;
+  &-img {
+    width: 80px;
+    height: 80px;
+  }
+  &-txt {
+    margin-block-start: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-image: linear-gradient(
-        180deg,
-        hsla(0, 0%, 100%, 0.7),
-        hsla(0, 0%, 100%, 0.7)
-      ),
-      url(https://res.cloudinary.com/dmmsf57ko/image/upload/v1685632878/onboarding-bg_lf354f.svg);
-    background-position: 0px 0px, 50% 0%;
-    background-size: auto, auto;
-    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
-    padding-block-start: 60px;
-    .empty-state-img {
-      width: 80px;
-      height: 80px;
+    h4 {
+      font-size: 34px;
+      color: #4f5059;
+      font-weight: 400;
+      text-align: center;
+      @include for-narrow-layout {
+        font-size: 27px;
+      }
+      @include for-mobile-layout {
+        font-size: 20px;
+      }
+      
     }
   }
-  
-  // @include for-narrow-layout {
-  //   display: none;
-    
-  // }
 }

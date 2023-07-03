@@ -12,6 +12,7 @@ import AislePreview from "./AislePreview"
 
 import { selectIsUserPantry, selectLoggedinUser } from "../store/reducers/user.slice";
 import { addIngToPantry, removeIngFromPantry } from "../store/actions/user.action";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const Pantry: React.FC = () => {
   const [aisles, setAisles] = useState<AisleObj[]>([])
@@ -40,9 +41,29 @@ const Pantry: React.FC = () => {
         <section className="pantry-index-body">
           <div className="list-wrapper">
             {isUserPantry ?
-              pantry.map((aisle) => (
-                <AislePreview key={aisle._id} aisle={aisle} isUserPantry={isUserPantry} />
-              ))
+              pantry.length !== 0 ?
+                pantry.map((aisle) => (
+                  <AislePreview key={aisle._id} aisle={aisle} isUserPantry={isUserPantry} />
+                )
+                )
+                :
+                <div className="list-wrapper empty-pantry-msg">
+                  <div className="empty-pantry-msg-img grocery-bag-img">
+                    <LazyLoadImage
+                      src={'https://res.cloudinary.com/dmmsf57ko/image/upload/v1688332990/groceries-svgrepo-com_1_xgvfjj.png'}
+                      width={'100%'}
+                      effect={'blur'}
+                    />
+                  </div>
+                  <div className="empty-pantry-msg-txt">
+                    <h4>
+                      Add ingredients to your pantry
+                    </h4>
+                    <h4>
+                      Every ingredient you add unlocks more recipes
+                    </h4>
+                    </div>
+                </div>
               :
               aisles.map((aisle) => (
                 <AislePreview onHandleIng={handleIng} key={aisle._id as Key} aisle={aisle} isUserPantry={isUserPantry} />

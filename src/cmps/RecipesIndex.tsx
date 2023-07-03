@@ -15,9 +15,11 @@ import { selectRecipes } from "../store/reducers/recipe.slice"
 import { loadRecipes, setRecipe } from "../store/actions/recipes.action"
 import { selectLoggedinUser } from "../store/reducers/user.slice"
 import { toggleFavourite } from "../store/actions/user.action"
+import RequireAuthModal from "./RequireAuthModal"
 
 const RecipesIndex: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isRequireAuth, setIsRequireAuth] = useState(false)
   const dispatch = useAppDispatch()
   const recipes = useAppSelector(selectRecipes)
   const loggedinUser = useAppSelector(selectLoggedinUser)
@@ -47,45 +49,59 @@ const RecipesIndex: React.FC = () => {
     dispatch(setRecipe(recipeId))
   }
   const onToggleFavourite = (recipe: RecipeObj): void => {
-    dispatch(toggleFavourite(recipe))
+    loggedinUser._id === "0000"
+      ?
+      setIsRequireAuth(true)
+      :
+      dispatch(toggleFavourite(recipe))
+  }
+  const closeRequireAuthModal = (): void => {
+    setIsRequireAuth(false)
   }
   return (
-
-    <div className="scroll-placeholder col-2">
-      <main className="recipes-index">
-        <MainHeader isPantry={false} />
-        <section className="recipes-index-body">
-          <div className="list-wrapper">
-            {
-              isLoading ?
-                <KitchenLoader />
-                :
-                recipes.length ?
-                  <>
-                    <h4>You Can Make {recipes.length} recipes</h4>
-                    <RecipesList onToggleFavourite={onToggleFavourite} onSetCurrRecipe={onSetCurrRecipe} recipes={recipes} />
-                  </>
+    <>
+      <div className="scroll-placeholder col-2">
+        <main className="recipes-index">
+          <MainHeader isPantry={false} />
+          <section className="recipes-index-body">
+            <div className="list-wrapper">
+              {
+                isLoading ?
+                  <KitchenLoader />
                   :
-                  <div className="list-wrapper empty-pantry-msg">
-                    <div className="empty-state-img">
-                      <LazyLoadImage
-                        src={'https://res.cloudinary.com/dmmsf57ko/image/upload/v1685632708/cook-book_bsntxb.png'}
-                        width={'100%'}
-                        effect={'blur'}
-                      />
+                  recipes.length ?
+                    <>
+                      <h4>You Can Make {recipes.length} recipes</h4>
+                      <RecipesList onToggleFavourite={onToggleFavourite} onSetCurrRecipe={onSetCurrRecipe} recipes={recipes} />
+                    </>
+                    :
+                    <div className="list-wrapper empty-pantry-msg">
+                      <div className="empty-pantry-msg-img">
+                        <LazyLoadImage
+                          src={'https://res.cloudinary.com/dmmsf57ko/image/upload/v1685632708/cook-book_bsntxb.png'}
+                          width={'100%'}
+                          effect={'blur'}
+                        />
+                      </div>
+                      <div className="empty-pantry-msg-txt">
+                        <h4>
+                          Add your ingredients to get started
+                        </h4>
+                        <h4>
+                          Every ingredient you add unlocks more recipes
+                        </h4>
+                      </div>
                     </div>
-                    <h4>
-                      Add your ingredients to get started
-                    </h4>
-                    <h4>
-                      Every ingredient you add unlocks more recipes
-                    </h4>
-                  </div>
-            }
-          </div>
-        </section>
-      </main>
-    </div>
+              }
+            </div>
+          </section>
+        </main>
+      </div>
+      {isRequireAuth &&
+        <RequireAuthModal closeRequireAuthModal={closeRequireAuthModal} />
+      }
+
+    </>
   )
 }
 export default RecipesIndex

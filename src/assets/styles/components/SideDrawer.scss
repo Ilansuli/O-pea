@@ -7,6 +7,7 @@
 }
 .d {
   width: 450px;
+
   position: fixed;
   overflow: auto;
   right: 0;
@@ -17,10 +18,13 @@
   z-index: 2;
   display: block;
   background-color: #fff;
-  transition: transform 0.30s ease-in;
+  transition: transform 0.3s ease-in;
   transform: translateX(450px);
   &.opened {
     transform: translateX(0px);
+    @include for-mobile-layout {
+      width: 100%;
+    }
   }
 
   &-content {
@@ -48,16 +52,16 @@
       transition: background-color 0.15s;
       cursor: pointer;
       background: white;
-      svg{
+      svg {
         width: 16px;
         height: 16px;
       }
       &:hover {
         background: $clr1;
         scale: 1.05;
-          path {
-            stroke: white;
-          }
+        path {
+          stroke: white;
+        }
       }
       svg {
         position: absolute;
@@ -205,29 +209,29 @@
     }
   }
   &-heart-icon {
-      stroke-width: 3;
-      width: 22px;
-      height: 22px;
+    stroke-width: 3;
+    width: 22px;
+    height: 22px;
+    svg {
+      stroke: $clr1;
+      cursor: pointer;
+      &:hover {
+        scale: 1.1;
+        fill: $clr1;
+      }
+    }
+    &.full {
       svg {
-        stroke: $clr1;
-        cursor: pointer;
-        &:hover {
-          scale: 1.1;
-          fill: $clr1;
-        }
+        fill: $clr1;
       }
-      &.full{
-        svg{
-          fill: $clr1;
-        }
-      }
+    }
   }
   &-clock-icon {
     width: 16px;
     height: 16px;
-      path {
-        stroke: $light-text;
-      }
+    path {
+      stroke: $light-text;
+    }
   }
   &-checked-icon {
     width: 36px;
@@ -239,8 +243,8 @@
   &-not-checked-icon {
     width: 36px;
     height: 36px;
-      path {
-        fill: red;
-      }
+    path {
+      fill: red;
+    }
   }
 }
