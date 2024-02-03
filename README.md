@@ -1,6 +1,6 @@
   <h1>O-pea</h1>
   <p>To use O-pea, please visit the following link:</p>
-  <a href="https://o-pea-app-cd5a.onrender.com/">https://o-pea-app-cd5a.onrender.com/</a>
+  <a href="https://o-pea-m2qy.onrender.com">https://o-pea.com/</a>
    <img src="https://res.cloudinary.com/dmmsf57ko/image/upload/v1686953338/O-pea_logo-removebg-preview_dsqizt.png" width="20%" />
 <p>O-pea is an end-to-end Project that revolutionizes recipe discovery by offering a convenient and personalized experience. With a focus on pantry-based cooking, it allows users to explore an extensive database of recipes tailored to the ingredients they already have. Say goodbye to food waste and hello to delicious meals with O-pea's intuitive interface and smart ingredient matching system.</p>
   <h2>Features</h2>
